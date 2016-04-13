@@ -15,11 +15,20 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-	<groupId>javax.servlet</groupId>
-	<artifactId>javax.servlet-api</artifactId>
-	<version>4.0.0-b01</version>
-</dependency>
-    
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>4.0.0-b01</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>4.3.6.Final</version>
+    </dependency>
+    <dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.31</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>sailnowapp</finalName>
