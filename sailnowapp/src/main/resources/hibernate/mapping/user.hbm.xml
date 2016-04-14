@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.sailnow.models">
-    <class name="UserModel" table="User">
+    <class name="UserModel" table="Users">
       <id name="email" type="string" column="email"/>
       
         <!--<property name="name" column="NAME" />-->

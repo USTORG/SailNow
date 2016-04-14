@@ -7,7 +7,7 @@ public class PackageModel {
 	private String duration;
 	private double price;
 	
-	private UserModel user;
+	private UserModel users;
 	
 	/**
 	 * @return the name
@@ -60,14 +60,14 @@ public class PackageModel {
 	/**
 	 * @return the user
 	 */
-	public UserModel getUser() {
-		return user;
+	public UserModel getUsers() {
+		return users;
 	}
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(UserModel user) {
-		this.user = user;
+	public void setUsers(UserModel user) {
+		this.users = user;
 	}
 
 }

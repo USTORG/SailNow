@@ -24,19 +24,23 @@ public class TestHibernate {
 		UserModel user = new UserModel();
 		user.setEmail("Yasinj6@gmail.com");
 		
-		PackageModel pkg = new PackageModel();
-		pkg.setName("Package 1");
-		pkg.setDescription("Package 1 Description");
-		pkg.setDuration("3 Weeks");
-		pkg.setPrice(700);
-		pkg.setUser(user);
+//		PackageModel pkg = new PackageModel();
+//		pkg.setName("Package 1");
+//		pkg.setDescription("Package 1 Description");
+//		pkg.setDuration("3 Weeks");
+//		pkg.setPrice(700);
+//		pkg.setUsers(user);
+//		
+//		Set<PackageModel> pack = new HashSet<PackageModel>();
+//		pack.add(pkg);
 		
-		Set<PackageModel> pack = new HashSet<PackageModel>();
-		pack.add(pkg);
-		
-		user.setPackages(pack);
+//		user.setPackages(pack);
 		session.save(user);
 		session.getTransaction().commit();
+		
+		UserModel newUser = (UserModel) session.get(UserModel.class,"Yasinj6@gmail.com");
+		System.out.println(newUser.getEmail());
+		
 		session.close();
 		
 	}

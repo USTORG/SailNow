@@ -16,7 +16,7 @@
       
       <join table="UserPackage" inverse="true">
       	<key column="name"/>
-         <many-to-one name="User" column="email" not-null="true"/>
+         <many-to-one name="Users" column="email" not-null="true"/>
       </join>
    </class>
 </hibernate-mapping>
