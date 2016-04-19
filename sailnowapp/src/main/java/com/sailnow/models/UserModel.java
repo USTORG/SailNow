@@ -2,8 +2,12 @@ package com.sailnow.models;
 
 import java.util.Set;
 
-public class UserModel {
+public class UserModel implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5646758005694344294L;
 	private String email;
 	private Set<PackageModel>packages;
 	/**

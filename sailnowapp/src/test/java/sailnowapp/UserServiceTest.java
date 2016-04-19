@@ -1,5 +1,8 @@
 package sailnowapp;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.PackageService;
 import com.sailnow.interfaces.UserService;
@@ -25,61 +28,56 @@ public class UserServiceTest extends TestCase {
 	{
 		TestSuite suite = new TestSuite();
 		
-		suite.addTest(new UserServiceTest("addUser"));
-		suite.addTest(new UserServiceTest("deleteUser"));
-//		suite.addTest(new UserServiceTest("addPackage"));
-//		suite.addTest(new UserServiceTest("removePackage"));
-		
+		suite.addTest(new UserServiceTest("createUser"));
+		suite.addTest(new UserServiceTest("findUser"));
+//		suite.addTest(new UserServiceTest("updateUser"));
+		suite.addTest(new UserServiceTest("addUserPackage"));
+//		suite.addTest(new UserServiceTest("addUserPackages"));
+//		suite.addTest(new UserServiceTest("removeUser"));
+
 		return suite;
 	}
 	
-	public void addUser()
+	public void createUser()
 	{
-		String email = "Yasinj6@gmail.com";
-		UserService user = mgrFactory.getUserService();
-		UserModel newUser = null;
-		if(user.getUser(email) == null)
-		{
-			newUser = user.addUser(email);
-			assertEquals(newUser.getEmail(),email);
-		}
-		assertTrue(true);
+		UserService userservice = mgrFactory.getUserService();
+		UserModel user = userservice.createUser("user1@email.com");
+		
+		assertNotNull("createUser() user : user1@email.com is created successfully", user);
+		
+	}
+
+	public void findUser()
+	{
+		String userid = "user1@email.com";
+		UserModel user = mgrFactory.getUserService().findUser(userid);
+		
+		assertNotNull("findUser() found user object ",user);
+		assertEquals("User : "+user.getEmail(), user.getEmail(), userid);
 	}
 	
-	public void deleteUser()
-	{
-		String email = "Yasinj6@gmail.com";
-		
-		UserService user = mgrFactory.getUserService();
-		user.deleteUser(email);
-		assertNull(user.getUser(email));
-	}
+//	public void updateUser()
+//	{
+//		String userid = "user2@email.com";
+//		UserService userservice = mgrFactory.getUserService();
+//
+//		UserModel user = userservice.findUser("user1@email.com");
+//		
+//
+//	}
 	
-	public void addPackage()
+	public void addUserPackage()
 	{
-		String email = "Yasinj6@gmail.com";
-		UserService user = mgrFactory.getUserService();
-		user.addUser(email);
+		String userid = "user1@email.com";
+		UserService userservice = mgrFactory.getUserService();
+		UserModel user = userservice.findUser(userid);
 		
-		PackageService packages = mgrFactory.getPackage();
-		PackageModel pack = new PackageModel();
-		pack.setName("Hawai Package");
-		pack.setDescription("This is amazing Package For People who never went to Hawai");
-		pack.setDuration("3 weeks");
-		pack.setPrice(850);
-		PackageService userpack = packages.createPackage(pack);
+		PackageModel pkg = new PackageModel("Hawai Package","Island resort with cruise","3 weeks",700,user);
 		
-		user.addPackage(userpack.getPackage("Hawai Package"));
+		mgrFactory.getPackage().createPackage(pkg);
+//		userservice.addUserPackage(userid, pkg);
 		
-		assertNotNull(user.getPackages().getPackage("Hawai Package"));
-	}
-	
-	public void removePackage()
-	{
-		UserService user = mgrFactory.getUserService();
+		assertEquals(userservice.findUser(userid).getPackages().size(), 1);
 		
-		user.removePackage("Hawai Package");
-		
-		assertNull(user.getPackages().getPackage("Hawai Package"));
 	}
 }

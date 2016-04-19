@@ -1,7 +1,11 @@
 package com.sailnow.models;
 
-public class PackageModel {
+public class PackageModel implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3976736972133655544L;
 	private String name;
 	private String description;
 	private String duration;
@@ -9,6 +13,20 @@ public class PackageModel {
 	
 	private UserModel users;
 	
+	
+	
+	
+	public PackageModel() {
+
+	}
+	public PackageModel(String name, String description, String duration, double price, UserModel users) {
+
+		this.name = name;
+		this.description = description;
+		this.duration = duration;
+		this.price = price;
+		this.users = users;
+	}
 	/**
 	 * @return the name
 	 */
