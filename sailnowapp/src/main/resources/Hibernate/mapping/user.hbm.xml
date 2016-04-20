@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.sailnow.models">
+    <class name="UserModel" table="Users">
+      <id name="email" type="string" column="email"/>
+      
+        <!--<property name="name" column="NAME" />-->
+ 
+ 		<set name="packages" table="Package" fetch="select" inverse="true" lazy="false" >
+			<key>
+				<column name="email" not-null="true"></column>
+			</key>
+			<one-to-many class="PackageModel"/>
+		</set>
+ 
+ 
+         <!--<set name="packages" table="UserPackage" cascade="all">
+            <key column="email" not-null="true" />
+            <many-to-many column="name" class="PackageModel" unique="true"/>
+        </set>-->
+        
+   <!--  <set name="packages" table="package"
+    		inverse="true" lazy="true" fetch="select" cascade="all">
+        <key>
+        	<column name="email" not-null="true"/>
+        </key>
+        <one-to-many class="com.sailnow.models.PackageModel"/>
+    </set> -->
+    </class> 
+</hibernate-mapping>

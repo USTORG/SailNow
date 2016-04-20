@@ -1,5 +1,6 @@
 package com.sailnow.core;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -73,9 +74,12 @@ public class PackageServiceImpl implements PackageService {
 	/* (non-Javadoc)
 	 * @see com.sailnow.interfaces.PackageService#listAllPackages()
 	 */
-	public Set<PackageModel> listAllPackages() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PackageModel> listAllPackages() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.getTransaction().begin();
+		List<PackageModel> pklist = session.createQuery("from PackageModel").list();
+		session.getTransaction().commit();
+		return pklist;
 	}
 
 

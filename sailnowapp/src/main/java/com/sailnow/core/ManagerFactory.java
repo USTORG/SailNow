@@ -6,7 +6,7 @@ import com.sailnow.interfaces.UserService;
 public class ManagerFactory {
 
 
-	public PackageService getPackage()
+	public PackageService getPackageService()
 	{
 		return new PackageServiceImpl();
 	}

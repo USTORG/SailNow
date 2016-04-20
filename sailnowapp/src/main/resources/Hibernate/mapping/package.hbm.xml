@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping package="com.sailnow.models">
+   <class name="PackageModel" table="Package">
+      <meta attribute="class-description">
+         This class contains the package details. 
+      </meta>
+      <id name="name" type="string" column="name"/>
+
+      <property name="description" column="description" type="string"/>
+      <property name="duration" column="duration" type="string"/>
+      <property name="price" column="price" type="double"/>
+      
+     <many-to-one name="users" class="UserModel">
+		<column name="email" not-null="true"></column>
+	</many-to-one>
+      
+     <!--  <join table="UserPackage" inverse="true">
+      	<key column="name"/>
+         <many-to-one name="users" column="email" not-null="true"/>
+      </join>-->
+      
+     <!--  <many-to-one name="users" column="email" class="com.sailnow.models.UserModel" fetch="select" not-null="true" /> -->
+     <!-- <many-to-one name="users" class="com.sailnow.models.UserModel" fetch="select">
+     	<column name="email" not-null="true"/>
+     </many-to-one> -->
+   </class>
+</hibernate-mapping>

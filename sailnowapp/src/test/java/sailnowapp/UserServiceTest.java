@@ -1,10 +1,6 @@
 package sailnowapp;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.sailnow.core.ManagerFactory;
-import com.sailnow.interfaces.PackageService;
 import com.sailnow.interfaces.UserService;
 import com.sailnow.models.PackageModel;
 import com.sailnow.models.UserModel;
@@ -31,9 +27,7 @@ public class UserServiceTest extends TestCase {
 		suite.addTest(new UserServiceTest("createUser"));
 		suite.addTest(new UserServiceTest("findUser"));
 //		suite.addTest(new UserServiceTest("updateUser"));
-		suite.addTest(new UserServiceTest("addUserPackage"));
-//		suite.addTest(new UserServiceTest("addUserPackages"));
-//		suite.addTest(new UserServiceTest("removeUser"));
+		suite.addTest(new UserServiceTest("removePackage"));
 
 		return suite;
 	}
@@ -66,18 +60,12 @@ public class UserServiceTest extends TestCase {
 //
 //	}
 	
-	public void addUserPackage()
+	public void removePackage()
 	{
 		String userid = "user1@email.com";
-		UserService userservice = mgrFactory.getUserService();
-		UserModel user = userservice.findUser(userid);
 		
-		PackageModel pkg = new PackageModel("Hawai Package","Island resort with cruise","3 weeks",700,user);
+		mgrFactory.getUserService().removeUser(userid);
 		
-		mgrFactory.getPackage().createPackage(pkg);
-//		userservice.addUserPackage(userid, pkg);
-		
-		assertEquals(userservice.findUser(userid).getPackages().size(), 1);
-		
+		assertNull(mgrFactory.getUserService().findUser(userid));
 	}
 }

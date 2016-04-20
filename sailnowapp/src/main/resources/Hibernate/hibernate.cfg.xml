@@ -29,8 +29,8 @@
 		 <property name="hbm2ddl.auto">create</property> 
 		
   
- 		<mapping resource="hibernate/mapping/package.hbm.xml"/> 
-		<mapping resource="hibernate/mapping/user.hbm.xml"/>
+ 		<mapping resource="Hibernate/mapping/package.hbm.xml"/> 
+		<mapping resource="Hibernate/mapping/user.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

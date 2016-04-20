@@ -1,6 +1,7 @@
 package com.sailnow.interfaces;
 
 
+import java.util.List;
 import java.util.Set;
 
 import com.sailnow.models.PackageModel;
@@ -15,6 +16,6 @@ public interface PackageService {
 	
 	public PackageModel findPackage(String pkName);
 	
-	public Set<PackageModel> listAllPackages();
+	public List<PackageModel> listAllPackages();
 	
 }
