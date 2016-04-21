@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="US-ASCII">
+<title>Package Sample</title>
+</head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<style type="text/css">
+		div#wrapper{
+			width: 1000px;
+		}
+		div#userPanel{
+		    width:200px;
+		    float: left;
+					
+		}
+		div#createPackagePanel{
+		    width:300px;
+		    float: left;
+		}
+		div#findPackagePanel{
+		    width:300px;
+		    float: left;
+					
+		}
+	</style>
+</head>
+
+<body>
+ 	<div id="wrapper"> 
+		<div id="userPanel">
+			<h2>Create User</h2>
+	        <form action="SampleServlet" method="get" target="display">
+	            Userid:
+	            <input type="text" name="action" value="createUser" hidden="true">
+	            <input type="text" name="userid">
+	            <input type="submit" value="create">
+	        </form>
+	     </div>	
+	     <div id="createPackagePanel">
+	     	<h2>Create Package</h2>
+	        <form action="SampleServlet" method="get" target="display">
+	            <input type="text" name="action" value="createPackage" hidden="true">
+	            Name:<input type="text" name="name"><br>
+	            Description:<input type="text" name="description"><br>
+	           	Duration:<input type="text" name="duration"><br>
+	            Price:<input type="text" name="price"><br>
+	            User:<input type="text" name="userid"><br>
+	            <input type="submit" value="create">
+	        </form>
+	      </div> 
+		<div id="findPackagePanel">
+			<h2>Find Package</h2>
+	        <form action="SampleServlet" method="get" target="display">
+	            Package Name:
+	            <input type="text" name="action" value="findPackage" hidden="true">
+	            <input type="text" name="name">
+	            <input type="submit" value="search">
+	        </form>
+	     </div>	  
+	       <iframe name="display" src="" style=" margin-top: 50px;width: 500px; border-style:solid;"></iframe>
+	</div>	
+	</body>
+	</html>
