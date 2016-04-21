@@ -30,57 +30,73 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 </head>
+
     
     
 <body>
-<div class="wrapper">
-<div class="application-info-div" id="application-info-div">
-   <div class="icon-service" id="icon-service">
-     <img src="images/Snow.png" height="120" width="120" title="Intert" class="img-icon-service">
-    </div>
-    
-    <div class="text-application-info-div" id="text-application-info-div">
-      <p class="title-text-application-info-div">Sail Now</p>
-  
-      <p class="description-text-application-info-div">Welcome to Sail Now. Get your best packages to the best Travel Agents.</p>
-      
-      <p class="application-status"><span class="">Sign in and get access to unlimited standard and customized packages. </span></p>
-    </div>
-</div>
+<div class="wrapperInside">
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="main-connection-div" id="main-connection-div">
-					    
-					    <div class="" id="log-in-main-connection-div">
-					      <p class="title-log-in-main-connection-div">Sign Up | Log in</p>
-					      <p class="title-log-in-main-connection-div">Using Gmail</p>
-					      
-					        <form>
-					           <div class="input-field>
-					             <div class="gSign">
-					                <img src="images/gSign.png" style="width: 100%; height:auto;"/>
-					              </div>
-					          </div>   
-					          <a class="waves-effect waves-light btn-large" style="margin: 20px 0 0 30px; background: #3498db; width: 45%; position: inherit;">Log in</a>
-					       
-					       
-					    </div>
-					    					   
-					      
-					    </div>				
+					<h3>
+						Add Package
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<form role="form">
+						<div class="form-group">
+							 
+							<label for="packName">
+								Package Name
+							</label>
+							<input type="text" class="form-control" id="packName" />
+						</div>
+						<div class="form-group">
+							 
+							<label for="inputDesc">
+								Description
+							</label>
+							<input type="text" class="form-control" id="inputDesc" />
+						</div>
+						<div class="form-group">
+							 
+							<label for="inputPrice">
+								Price
+							</label>
+							<input type="number" class="form-control" id="inputPrice" />
+						</div>
+						<div class="form-group">
+							 
+							<label for="dur">
+								Duration
+							</label>
+							<input type="file" id="dur" />
+							<p class="help-block">
+								Example block-level help text here.
+							</p>
+						</div>
+						 
+						<button type="submit" class="btn btn-default">
+							SAVE
+						</button>
+					</form>
+				</div>
+				<div class="col-md-4">
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
+  
 </div>
-</div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
