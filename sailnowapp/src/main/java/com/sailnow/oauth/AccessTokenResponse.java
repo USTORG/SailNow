@@ -4,71 +4,46 @@ import com.sailnow.models.UserModel;
 
 public class AccessTokenResponse {
 
-	private String email;
-	private String accessToken;
-	private Long expiresIn;
-	private String refreshToken;
-	private UserModel users;
+	private String access_token;
+	private Long expires_in;
+	private String token_type;
+	
 	
 	/**
-	 * @return the email
+	 * @return the access_token
 	 */
-	public String getEmail() {
-		return email;
+	public String getAccess_token() {
+		return access_token;
 	}
 	/**
-	 * @param email the email to set
+	 * @param access_token the access_token to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAccess_token(String access_token) {
+		this.access_token = access_token;
 	}
 	/**
-	 * @return the accessToken
+	 * @return the expires_in
 	 */
-	public String getAccessToken() {
-		return accessToken;
+	public Long getExpires_in() {
+		return expires_in;
 	}
 	/**
-	 * @param accessToken the accessToken to set
+	 * @param expires_in the expires_in to set
 	 */
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
+	public void setExpires_in(Long expires_in) {
+		this.expires_in = expires_in;
 	}
 	/**
-	 * @return the expiresIn
+	 * @return the token_type
 	 */
-	public Long getExpiresIn() {
-		return expiresIn;
+	public String getToken_type() {
+		return token_type;
 	}
 	/**
-	 * @param expiresIn the expiresIn to set
+	 * @param token_type the token_type to set
 	 */
-	public void setExpiresIn(Long expiresIn) {
-		this.expiresIn = expiresIn;
+	public void setToken_type(String token_type) {
+		this.token_type = token_type;
 	}
-	/**
-	 * @return the refreshToken
-	 */
-	public String getRefreshToken() {
-		return refreshToken;
-	}
-	/**
-	 * @param refreshToken the refreshToken to set
-	 */
-	public void setRefreshToken(String refreshToken) {
-		this.refreshToken = refreshToken;
-	}
-	/**
-	 * @return the users
-	 */
-	public UserModel getUsers() {
-		return users;
-	}
-	/**
-	 * @param users the users to set
-	 */
-	public void setUsers(UserModel users) {
-		this.users = users;
-	}
-	
+
 }

@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sailnow.utils.CachUtil;
+
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
@@ -48,12 +50,15 @@ public class AuthenticationFilter implements Filter {
         this.context.log("Requested Resource::"+uri);
         
         HttpSession session = req.getSession(false);
+       
 //        if(session == null && !uri.endsWith("/sailnowapp/index.html") && !uri.endsWith("/sailnowapp/SignIn") && !uri.endsWith("/sailnowapp/oauth2callback"))
 //        {
          if(session == null && uri.endsWith("html") && !uri.endsWith("index.html")){
             this.context.log("Unauthorized access request");
+            CachUtil.putInCache("requestUrl",uri);
             res.sendRedirect("/sailnowapp/index.html");
         }else{
+        	 System.out.println("Found session id= "+session.getId());
             chain.doFilter(req, res);
         }
 

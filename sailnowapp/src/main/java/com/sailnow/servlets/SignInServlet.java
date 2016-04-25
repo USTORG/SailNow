@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.OAuthService;
-import com.sailnow.oauth.GoogleApi;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthServiceBuilder;
+import com.sailnow.utils.CachUtil;
 import com.sailnow.oauth.OAuthRequest;
-import com.sailnow.oauth.OauthService;
-import com.sailnow.oauth.ServiceBuilder;
+
 
 /**
  * Servlet implementation class SignInServlet
@@ -60,6 +59,12 @@ public class SignInServlet extends HttpServlet {
 //		OauthRequest req = new OauthRequest(prop.getClientId(),
 //				OAuthCodeCallbackHandlerServlet.getOAuthCodeCallbackHandlerUrl(request),GoogleApi.oauthEndpoint(),
 //				prop.getScopesAsString());
+		
+		if(CachUtil.size() == 0)
+		{
+			CachUtil.putInCache("requestUrl", "/sailnowapp/protected/user.html");
+		}
+		
 		OAuthService service = new OAuthServiceBuilder().provider(GoogleProvider.class).build(new OAuthProperties());
 		String redirectUri = service.getAuthorizationRequestUrl(OAuthCodeCallbackHandlerServlet.getOAuthCodeCallbackHandlerUrl(request));
 

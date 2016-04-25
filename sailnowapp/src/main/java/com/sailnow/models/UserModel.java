@@ -11,7 +11,8 @@ public class UserModel implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = -5646758005694344294L;
 	private String email;
-	private AccessTokenResponse accesstoken;
+	private String given_name;
+	private String family_name;
 	private Set<PackageModel>packages;
 	/**
 	 * @return the email
@@ -26,16 +27,28 @@ public class UserModel implements java.io.Serializable{
 		this.email = email;
 	}
 	/**
-	 * @return the accesstoken
+	 * @return the given_name
 	 */
-	public AccessTokenResponse getAccesstoken() {
-		return accesstoken;
+	public String getGiven_name() {
+		return given_name;
 	}
 	/**
-	 * @param accesstoken the accesstoken to set
+	 * @param given_name the given_name to set
 	 */
-	public void setAccesstoken(AccessTokenResponse accesstoken) {
-		this.accesstoken = accesstoken;
+	public void setGiven_name(String given_name) {
+		this.given_name = given_name;
+	}
+	/**
+	 * @return the family_name
+	 */
+	public String getFamily_name() {
+		return family_name;
+	}
+	/**
+	 * @param family_name the family_name to set
+	 */
+	public void setFamily_name(String family_name) {
+		this.family_name = family_name;
 	}
 	/**
 	 * @return the packages

@@ -14,4 +14,9 @@ public class GoogleProvider extends Provider {
 		return "https://accounts.google.com/o/oauth2/auth";
 	}
 
+	@Override
+	public String getUserInfoUrl() {
+		return "https://www.googleapis.com/oauth2/v1/userinfo";
+	}
+
 }

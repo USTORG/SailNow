@@ -26,6 +26,14 @@ public class UserServiceImpl implements UserService {
 		return findUser(userid);
 	}
 
+	public void createUser(UserModel user) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.getTransaction().begin();
+		session.save(user);
+		session.getTransaction().commit();
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.sailnow.interfaces.UserService#removeUser(java.lang.String)
 	 */
@@ -72,12 +80,5 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	public void createUser(UserModel user) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.getTransaction().begin();
-		session.save(user);
-		session.getTransaction().commit();
-		
-	}
 	
 }

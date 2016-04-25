@@ -17,7 +17,7 @@ public class OAuthTokenDaoImpl implements OAuthTokenDao {
 //		{
 //			user = ManagerFactory.getUserService().createUser(email);
 //		}
-		accessToken.setUsers(user);
+//		accessToken.setUsers(user);
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.getTransaction().begin();
 		session.save(accessToken);

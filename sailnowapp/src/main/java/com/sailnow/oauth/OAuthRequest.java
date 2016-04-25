@@ -53,6 +53,40 @@ public class OAuthRequest {
 	{
 		this.requestUrl = requestUrl;
 	}
+	
+	public void addBodyParam(String oauthAccessToken, AccessTokenResponse accessToken) {
+		
+		
+	}
+	
+	public String executeGetMethod(String url)
+	{
+		HttpGet get = new HttpGet(url);
+		StringBuffer response = new StringBuffer();
+		try {
+			HttpResponse httResponse = httpClient.execute(get);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+		    		httResponse.getEntity().getContent()));
+	 
+	        String inputLine;
+	       
+	 
+	        while ((inputLine = reader.readLine()) != null) {
+	            response.append(inputLine);
+	        }
+	        reader.close();
+	 
+	        // print result
+	        System.out.println(response.toString());
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return response.toString();
+	}
+	
 	public String executePostMethod(String url) {
 		
 		
@@ -92,6 +126,5 @@ public class OAuthRequest {
 		}
 		return response.toString();
 	}
-
 
 }

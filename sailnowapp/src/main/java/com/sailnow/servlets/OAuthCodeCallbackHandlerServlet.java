@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,10 +24,12 @@ import com.google.gson.Gson;
 import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.OAuthService;
 import com.sailnow.interfaces.OAuthTokenDao;
+import com.sailnow.interfaces.UserService;
 import com.sailnow.models.UserModel;
 import com.sailnow.oauth.AccessTokenResponse;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthServiceBuilder;
+import com.sailnow.utils.CachUtil;
 import com.sailnow.oauth.OAuthRequest;
 
 /**
@@ -81,6 +84,47 @@ public class OAuthCodeCallbackHandlerServlet extends HttpServlet {
 //	    AccessTokenResponse accessTokenResponse = exchangeCodeForAccessAndRefreshTokens(code[0],
 //	        requestUrl);
 	    AccessTokenResponse accessToken = service.getAccessToken(code[0],requestUrl);
+	    
+	    //Maybe pressist oauth token
+	    
+	    //Get user information using access token
+	    UserModel user = service.getUser(accessToken);
+	    
+	    UserService userservice = ManagerFactory.getUserService();
+	    
+	    if(user == null)
+	    {
+	    	//handle this case
+	    }
+	    
+	    
+	    
+	    if(userservice.findUser(user.getEmail()) == null)
+	    {
+	    	 ManagerFactory.getUserService().createUser(user);
+	    }
+	    
+	   
+	    //Create Session 
+	    
+	    HttpSession session = request.getSession();
+	    session.setAttribute("accessToken", accessToken);
+	    session.setAttribute("User", user);
+	    System.out.println("Create session id= "+session.getId());
+	    String url = (String) CachUtil.getFromCache("requestUrl");
+	    System.out.println("Redirecting url "+url);
+	    response.setHeader("Cache-Control", "no-cache");
+
+	    //Forces caches to obtain a new copy of the page from the origin server
+	    response.setHeader("Cache-Control", "no-store");
+
+	    //Directs caches not to store the page under any circumstance
+	    response.setDateHeader("Expires", 0);
+
+	    //Causes the proxy cache to see the page as "stale"
+	    response.setHeader("Pragma", "no-cache");
+	  
+	    response.sendRedirect(url);
 	    
 //	    UserModel user = service.getUser
 //	    UserModel user = getCurrentUser(accessTokenResponse);

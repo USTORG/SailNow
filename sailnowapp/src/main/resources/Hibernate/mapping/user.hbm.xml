@@ -7,7 +7,9 @@
       <id name="email" type="string" column="email"/>
       
         <!--<property name="name" column="NAME" />-->
- 
+ 		<property name="given_name" column="given_name" type="string"/>
+ 		<property name="family_name" column="family_name" type="string"/>
+ 		
  		<set name="packages" table="Package" fetch="select" inverse="true" lazy="false" >
 			<key>
 				<column name="email" not-null="true"></column>
