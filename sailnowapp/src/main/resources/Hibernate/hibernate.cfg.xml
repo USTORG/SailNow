@@ -26,11 +26,13 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>  
 		
-		 <!-- <property name="hbm2ddl.auto">create</property> --> 
+		<property name="hbm2ddl.auto">create</property>
 		
   
  		<mapping resource="Hibernate/mapping/package.hbm.xml"/> 
 		<mapping resource="Hibernate/mapping/user.hbm.xml"/>
+		<mapping resource="Hibernate/mapping/accesstoken.hbm.xml"/>
+		
     </session-factory>
 
 </hibernate-configuration>

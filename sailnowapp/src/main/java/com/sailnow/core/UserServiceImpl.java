@@ -71,5 +71,13 @@ public class UserServiceImpl implements UserService {
 		session.getTransaction().commit();	
 		return user;
 	}
+
+	public void createUser(UserModel user) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.getTransaction().begin();
+		session.save(user);
+		session.getTransaction().commit();
+		
+	}
 	
 }

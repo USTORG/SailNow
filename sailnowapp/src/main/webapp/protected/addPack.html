@@ -9,7 +9,7 @@
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,7 +26,7 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 </head>
@@ -39,63 +39,58 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>
-				Packages
-			</h3>
-			<ul class="breadcrumb">
-				<li>
-					<a href="#">Home</a> <span class="divider">/</span>
-				</li>
-				<li>
-					<a href="#">Packages</a> <span class="divider">/</span>
-				</li>
-				<li class="active">
-					hawaii
-				</li>
-			<div class="col-md-12 mainImg">
-			</ul>
-			<img width="100%" Height="auto" alt="Bootstrap Image Preview" src="http://www.robertshawaii.com/public/roberts/circle-banner_2.jpg" />
-			<div class="price" col-md-2>
-			<h5>Price:<span>$350</span></h5>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>
+						Add Package
+					</h3>
+				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<form role="form">
+						<div class="form-group">
+							 
+							<label for="packName">
+								Package Name
+							</label>
+							<input type="text" class="form-control" id="packName" />
+						</div>
+						<div class="form-group">
+							 
+							<label for="inputDesc">
+								Description
+							</label>
+							<input type="text" class="form-control" id="inputDesc" />
+						</div>
+						<div class="form-group">
+							 
+							<label for="inputPrice">
+								Price
+							</label>
+							<input type="number" class="form-control" id="inputPrice" />
+						</div>
+						<div class="form-group">
+							 
+							<label for="dur">
+								Duration
+							</label>
+							<input type="file" id="dur" />
+							<p class="help-block">
+								Example block-level help text here.
+							</p>
+						</div>
+						 
+						<button type="submit" class="btn btn-default">
+							SAVE
+						</button>
+					</form>
+				</div>
+				<div class="col-md-4">
+				</div>
 			</div>
-			
-			
-			<div class="col-md-12 dtl">
-		
-			<h3>
-				Hawaii Getaway
-			</h3>
-			<dl>
-				<dt>
-					Description lists
-				</dt>
-				<dd>
-					A description list is perfect for defining terms.
-				</dd>
-				<dt>
-					Euismod
-				</dt>
-				<dd>
-					Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-				</dd>
-				<dd>
-					Donec id elit non mi porta gravida at eget metus.
-				</dd>
-				<dt>
-					Malesuada porta
-				</dt>
-				<dd>
-					Etiam porta sem malesuada magna mollis euismod.
-				</dd>
-				<dt>
-					Felis euismod semper eget lacinia
-				</dt>
-				<dd>
-					Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-				</dd>
-			</dl>
-		</div>
 		</div>
 	</div>
 </div>
@@ -105,6 +100,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
   </body>
 </html>    

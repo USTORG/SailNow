@@ -11,5 +11,7 @@ public interface UserService {
 	public UserModel updateUser(UserModel user);
 	
 	public UserModel findUser(String userid);
+
+	public void createUser(UserModel user);
 	
 }

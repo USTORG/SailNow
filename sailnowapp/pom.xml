@@ -49,6 +49,16 @@
 		<artifactId>json</artifactId>
 		<version>20160212</version>
 	</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.6.2</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>sailnowapp</finalName>
