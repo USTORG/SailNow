@@ -11,21 +11,21 @@ public class PackageModel implements java.io.Serializable {
 	private String duration;
 	private double price;
 	
-	private UserModel users;
-	
+	private UserModel seller;
+	private UserModel buyer;
 	
 	
 	
 	public PackageModel() {
 
 	}
-	public PackageModel(String name, String description, String duration, double price, UserModel users) {
+	public PackageModel(String name, String description, String duration, double price, UserModel seller) {
 
 		this.name = name;
 		this.description = description;
 		this.duration = duration;
 		this.price = price;
-		this.users = users;
+		this.seller = seller;
 	}
 	/**
 	 * @return the name
@@ -76,16 +76,29 @@ public class PackageModel implements java.io.Serializable {
 		this.price = price;
 	}
 	/**
-	 * @return the user
+	 * @return the sellusers
 	 */
-	public UserModel getUsers() {
-		return users;
+	public UserModel getSeller() {
+		return seller;
 	}
 	/**
-	 * @param user the user to set
+	 * @param sellusers the sellusers to set
 	 */
-	public void setUsers(UserModel user) {
-		this.users = user;
+	public void setSeller(UserModel seller) {
+		this.seller = seller;
 	}
+	/**
+	 * @return the buyusers
+	 */
+	public UserModel getBuyer() {
+		return buyer;
+	}
+	/**
+	 * @param buyusers the buyusers to set
+	 */
+	public void setBuyer(UserModel buyer) {
+		this.buyer = buyer;
+	}
+
 
 }

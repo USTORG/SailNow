@@ -1,4 +1,5 @@
 package com.sailnow.core;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class PackageServiceImpl implements PackageService {
 		
 		ManagerFactory mgrFactory = new ManagerFactory();
 		UserService userservice = mgrFactory.getUserService();
-		UserModel user = userservice.findUser(pack.getUsers().getEmail());
+		UserModel user = userservice.findUser(pack.getSeller().getEmail());
 		
 		if(user == null)
 			System.out.println("Error: User doesn't exist");
@@ -80,6 +81,19 @@ public class PackageServiceImpl implements PackageService {
 		List<PackageModel> pklist = session.createQuery("from PackageModel").list();
 		session.getTransaction().commit();
 		return pklist;
+	}
+	
+	public List<PackageModel> getAllPackagesForUser(UserModel user)
+	{
+		List<PackageModel> list = new ArrayList<PackageModel>();
+		
+		for(PackageModel pack : user.getSellpackages())
+		{
+			PackageModel foundPack = findPackage(pack.getName());
+			list.add(foundPack);
+		}
+		
+		return list;
 	}
 
 

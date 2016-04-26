@@ -106,7 +106,7 @@ public class SampleServlet extends HttpServlet {
 		json.put("description", pkmodel.getDescription());
 		json.put("duration", pkmodel.getDuration());
 		json.put("price", pkmodel.getPrice());
-		json.put("userid", pkmodel.getUsers().getEmail());
+		json.put("userid", pkmodel.getSeller().getEmail());
 		return json.toString();
 	}
 

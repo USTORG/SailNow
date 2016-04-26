@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.sailnow.models.PackageModel;
+import com.sailnow.models.UserModel;
 
 public interface PackageService {
 
@@ -17,5 +18,7 @@ public interface PackageService {
 	public PackageModel findPackage(String pkName);
 	
 	public List<PackageModel> listAllPackages();
+	
+	public List<PackageModel> getAllPackagesForUser(UserModel user);
 	
 }

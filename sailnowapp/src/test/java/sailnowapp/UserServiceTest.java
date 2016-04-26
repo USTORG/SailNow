@@ -1,5 +1,8 @@
 package sailnowapp;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.UserService;
 import com.sailnow.models.PackageModel;
@@ -26,7 +29,7 @@ public class UserServiceTest extends TestCase {
 		
 		suite.addTest(new UserServiceTest("createUser"));
 		suite.addTest(new UserServiceTest("findUser"));
-//		suite.addTest(new UserServiceTest("updateUser"));
+		suite.addTest(new UserServiceTest("buyPackage"));
 		suite.addTest(new UserServiceTest("removePackage"));
 
 		return suite;
@@ -60,12 +63,43 @@ public class UserServiceTest extends TestCase {
 //
 //	}
 	
+	public void buyPackage()
+	{
+		String seller = "user1@email.com";
+		String buyer = "user2@email.com";
+		
+		UserModel user1 = ManagerFactory.getUserService().findUser(seller);
+		PackageModel pkg = new PackageModel("Hawai Package",
+				"Hawai Package Description",
+				"3 weeks",
+				700,user1);
+		
+		ManagerFactory.getPackageService().createPackage(pkg);
+		
+		ManagerFactory.getUserService().createUser(buyer);
+		
+		UserModel user2 = ManagerFactory.getUserService().findUser(buyer);
+		Set<PackageModel> buypkg = new HashSet<PackageModel>();
+		PackageModel buy = ManagerFactory.getPackageService().findPackage(pkg.getName());
+		buypkg.add(buy);
+		user2.setBuypackages(buypkg);
+		
+		ManagerFactory.getUserService().updateUser(user2);
+		
+		int size = ManagerFactory.getUserService().findUser(buyer).getBuypackages().size();
+		
+		assertEquals(size, 1);
+		
+	}
 	public void removePackage()
 	{
-		String userid = "user1@email.com";
+		String user1 = "user1@email.com";
+		String user2 = "user2@email.com";
+//		mgrFactory.getPackageService().removePackage("Hawai Package");
+		mgrFactory.getUserService().removeUser(user1);
+		mgrFactory.getUserService().removeUser(user2);
+
 		
-		mgrFactory.getUserService().removeUser(userid);
-		
-		assertNull(mgrFactory.getUserService().findUser(userid));
+		assertNull(mgrFactory.getUserService().findUser(user1));
 	}
 }

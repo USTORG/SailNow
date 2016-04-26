@@ -10,19 +10,22 @@
  		<property name="given_name" column="given_name" type="string"/>
  		<property name="family_name" column="family_name" type="string"/>
  		
- 		<set name="packages" table="Package" fetch="select" inverse="true" lazy="false" >
+<!--  		<set name="packages" table="Package" fetch="select" inverse="true" lazy="false" >
 			<key>
 				<column name="email" not-null="true"></column>
 			</key>
 			<one-to-many class="PackageModel"/>
-		</set>
+		</set> -->
  
  
-         <!--<set name="packages" table="UserPackage" cascade="all">
+      <set name="sellpackages" table="sellpackages" cascade="all" inverse="true" lazy="false" >
             <key column="email" not-null="true" />
             <many-to-many column="name" class="PackageModel" unique="true"/>
-        </set>-->
-        
+        </set>
+        <set name="buypackages" table="buypackages" cascade="all" lazy="false" >
+            <key column="email" not-null="true" />
+            <many-to-many column="name" class="PackageModel" unique="true"/>
+        </set>
    <!--  <set name="packages" table="package"
     		inverse="true" lazy="true" fetch="select" cascade="all">
         <key>

@@ -50,7 +50,7 @@ public class PackageServiceTest extends TestCase {
 				700,user);
 		pkservice.createPackage(pkg);
 		pkservice.createPackage(pkg2);
-		assertEquals(userservice.findUser(userid).getPackages().size(), 2);
+		assertEquals(userservice.findUser(userid).getSellpackages().size(), 2);
 	}
 	
 	public void findPackage()

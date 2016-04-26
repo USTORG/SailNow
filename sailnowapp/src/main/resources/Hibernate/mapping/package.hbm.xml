@@ -14,15 +14,18 @@
       <property name="duration" column="duration" type="string"/>
       <property name="price" column="price" type="double"/>
       
-     <many-to-one name="users" class="UserModel">
+<!--      <many-to-one name="users" class="UserModel">
 		<column name="email" not-null="true"></column>
-	</many-to-one>
+	</many-to-one> -->
       
-     <!--  <join table="UserPackage" inverse="true">
+    <join table="sellpackages" inverse="true">
       	<key column="name"/>
-         <many-to-one name="users" column="email" not-null="true"/>
-      </join>-->
-      
+         <many-to-one name="seller" column="email" not-null="true"/>
+      </join>
+      <join table="buypackages" inverse="true">
+      	<key column="name"/>
+         <many-to-one name="buyer" column="email" not-null="true"/>
+      </join>
      <!--  <many-to-one name="users" column="email" class="com.sailnow.models.UserModel" fetch="select" not-null="true" /> -->
      <!-- <many-to-one name="users" class="com.sailnow.models.UserModel" fetch="select">
      	<column name="email" not-null="true"/>

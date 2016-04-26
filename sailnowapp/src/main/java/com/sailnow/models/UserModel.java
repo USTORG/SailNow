@@ -13,7 +13,8 @@ public class UserModel implements java.io.Serializable{
 	private String email;
 	private String given_name;
 	private String family_name;
-	private Set<PackageModel>packages;
+	private Set<PackageModel>sellpackages;
+	private Set<PackageModel>buypackages;
 	/**
 	 * @return the email
 	 */
@@ -50,17 +51,41 @@ public class UserModel implements java.io.Serializable{
 	public void setFamily_name(String family_name) {
 		this.family_name = family_name;
 	}
+//	/**
+//	 * @return the packages
+//	 */
+//	public Set<PackageModel> getPackages() {
+//		return sellpackages;
+//	}
+//	/**
+//	 * @param packages the packages to set
+//	 */
+//	public void setPackages(Set<PackageModel> packages) {
+//		this.sellpackages = packages;
+//	}
 	/**
-	 * @return the packages
+	 * @return the sellpackages
 	 */
-	public Set<PackageModel> getPackages() {
-		return packages;
+	public Set<PackageModel> getSellpackages() {
+		return sellpackages;
 	}
 	/**
-	 * @param packages the packages to set
+	 * @param sellpackages the sellpackages to set
 	 */
-	public void setPackages(Set<PackageModel> packages) {
-		this.packages = packages;
+	public void setSellpackages(Set<PackageModel> sellpackages) {
+		this.sellpackages = sellpackages;
+	}
+	/**
+	 * @return the buypackages
+	 */
+	public Set<PackageModel> getBuypackages() {
+		return buypackages;
+	}
+	/**
+	 * @param buypackages the buypackages to set
+	 */
+	public void setBuypackages(Set<PackageModel> buypackages) {
+		this.buypackages = buypackages;
 	}
 	
 	

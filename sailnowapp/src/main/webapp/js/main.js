@@ -16,3 +16,4 @@ showPasswordForgotten = function() {
 closePF = function() {
    $('.password-reset-div').fadeOut();
 }
+
