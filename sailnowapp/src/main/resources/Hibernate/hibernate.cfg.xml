@@ -25,14 +25,18 @@
 	
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>  
-		
+		<property name="format_sql">true</property>
 		<property name="hbm2ddl.auto">create</property>
 		
   
- 		<mapping resource="Hibernate/mapping/package.hbm.xml"/> 
+ 	<!-- 	<mapping resource="Hibernate/mapping/package.hbm.xml"/> 
 		<mapping resource="Hibernate/mapping/user.hbm.xml"/>
+		<mapping resource="Hibernate/mapping/saleitem.hbm.xml"/> -->
 		<!--<mapping resource="Hibernate/mapping/accesstoken.hbm.xml"/>  -->
-		
+		<mapping class="com.sailnow.models.Items" />
+    	<mapping class="com.sailnow.models.User" />
+    	<mapping class="com.sailnow.models.SaleItem" />
+    	<mapping class="com.sailnow.models.SaleItemId" />
     </session-factory>
 
 </hibernate-configuration>
