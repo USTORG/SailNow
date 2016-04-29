@@ -4,6 +4,18 @@ body, html {
   background: #F5F5F5;
   width: 100%;
 }
+.thumbnail {
+    width: 31.3% !important;
+    margin: 15px 0.5% !important;
+    padding: 10px !important;
+}
+.thumbnail h5, .thumbnail h4 {
+    text-align: center;
+}
+.btn {
+    margin-right: 12px;
+    margin-left: 15px;
+}
 .wrapperInside {
     
     background-attachment: fixed;
@@ -14,6 +26,13 @@ body, html {
 	background-attachment: fixed;
     background-size: cover;
 }
+
+/*---USER PAGE----*/
+#userName {
+    color: #fff;
+    padding: 10px 0;
+}
+
 .application-info-div {
   margin-left: auto !important;
   margin-right: auto !important;
