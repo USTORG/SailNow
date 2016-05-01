@@ -16,7 +16,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -25,7 +24,7 @@ import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.OAuthService;
 import com.sailnow.interfaces.OAuthTokenDao;
 import com.sailnow.interfaces.UserService;
-import com.sailnow.models.UserModel;
+import com.sailnow.models.User;
 import com.sailnow.oauth.AccessTokenResponse;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthServiceBuilder;
@@ -88,7 +87,7 @@ public class OAuthCodeCallbackHandlerServlet extends HttpServlet {
 	    //Maybe pressist oauth token
 	    
 	    //Get user information using access token
-	    UserModel user = service.getUser(accessToken);
+	    User user = service.getUser(accessToken);
 	    
 	    UserService userservice = ManagerFactory.getUserService();
 	    

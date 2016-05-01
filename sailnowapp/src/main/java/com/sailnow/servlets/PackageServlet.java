@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
-import com.sailnow.models.UserModel;
 
 /**
  * Servlet implementation class PackageServlet

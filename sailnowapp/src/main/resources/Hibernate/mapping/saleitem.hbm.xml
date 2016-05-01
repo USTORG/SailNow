@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+ <hibernate-mapping package="com.sailnow.models">
+ 	<class name="SaleItem" table="SaleItem">
+      <meta attribute="class-description">
+         This class contains the oauth access token details. 
+      </meta>
+      
+      <composite-id name="id" class="SaleItemId">
+        <key-many-to-one name="user" class="User" column="email" />
+        <key-many-to-one name="Items" class="Items" column="name" />
+     </composite-id>
+     
+      <property name="type" column="type" type="string"/>
+ 	</class>
+ </hibernate-mapping>

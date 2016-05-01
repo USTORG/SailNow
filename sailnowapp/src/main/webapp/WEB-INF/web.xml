@@ -19,12 +19,6 @@
   	<url-pattern>/protected/*</url-pattern>
   </filter-mapping>
   <servlet>
-  	<servlet-name>SampleServlet</servlet-name>
-  	<display-name>SampleServlet</display-name>
-  	<description></description>
-  	<servlet-class>com.sailnow.servlets.SampleServlet</servlet-class>
-  </servlet>
-  <servlet>
   	<servlet-name>PackageService</servlet-name>
   	<display-name>PackageService</display-name>
   	<description></description>
@@ -54,10 +48,18 @@
   	<description></description>
   	<servlet-class>com.sailnow.servlets.UserServiceServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
+  <servlet>
   	<servlet-name>SampleServlet</servlet-name>
-  	<url-pattern>/SampleServlet</url-pattern>
-  </servlet-mapping>
+  	<display-name>SampleServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.sailnow.servlets.SampleServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ItemService</servlet-name>
+  	<display-name>ItemService</display-name>
+  	<description></description>
+  	<servlet-class>com.sailnow.servlets.ItemServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>PackageService</servlet-name>
   	<url-pattern>/PackageService</url-pattern>
@@ -77,5 +79,13 @@
   <servlet-mapping>
   	<servlet-name>UserService</servlet-name>
   	<url-pattern>/UserService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SampleServlet</servlet-name>
+  	<url-pattern>/SampleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ItemService</servlet-name>
+  	<url-pattern>/ItemService</url-pattern>
   </servlet-mapping>
 </web-app>

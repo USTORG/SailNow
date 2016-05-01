@@ -2,8 +2,8 @@ package com.sailnow.core;
 
 import java.io.IOException;
 
+import com.sailnow.interfaces.ItemService;
 import com.sailnow.interfaces.OAuthTokenDao;
-import com.sailnow.interfaces.PackageService;
 import com.sailnow.interfaces.UserService;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthRequest;
@@ -11,9 +11,9 @@ import com.sailnow.oauth.OAuthRequest;
 public class ManagerFactory {
 
 
-	public static PackageService getPackageService()
+	public static ItemService getItemService()
 	{
-		return new PackageServiceImpl();
+		return new ItemServiceImpl();
 	}
 	
 	public static UserService getUserService()

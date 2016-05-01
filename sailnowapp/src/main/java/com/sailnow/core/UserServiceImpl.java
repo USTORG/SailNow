@@ -1,84 +1,51 @@
 package com.sailnow.core;
 
 import org.hibernate.Session;
+
 import com.sailnow.interfaces.UserService;
-import com.sailnow.models.UserModel;
+import com.sailnow.models.User;
 import com.sailnow.utils.HibernateUtil;
 
 public class UserServiceImpl implements UserService {
 
 	
-	
-	
-	/* (non-Javadoc)
-	 * @see com.sailnow.interfaces.UserService#createUser(java.lang.String)
-	 */
-	public UserModel createUser(String userid) {
-		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.getTransaction().begin();
-		UserModel user = new UserModel();
-		user.setEmail(userid);
+	public void createUser(User user) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
 		session.save(user);
-		session.getTransaction().commit();
 		
-		return findUser(userid);
+		session.getTransaction().commit();
 	}
 
-	public void createUser(UserModel user) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.getTransaction().begin();
-		session.save(user);
-		session.getTransaction().commit();
-		
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.sailnow.interfaces.UserService#removeUser(java.lang.String)
-	 */
 	public void removeUser(String userid) {
-		
-		UserModel user = findUser(userid);
-		
-		if( user == null)
-			System.out.println("Error: User does not exist");
-		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.getTransaction().begin();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		User user = (User) session.get(User.class, userid);
 		session.delete(user);
+
 		session.getTransaction().commit();
-		
 	}
 
-	/* (non-Javadoc)
-	 * @see com.sailnow.interfaces.UserService#updateUser(com.sailnow.models.UserModel)
-	 */
-	public UserModel updateUser(UserModel user) {
+	public void updateUser(User user) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
-		if(findUser(user.getEmail()) == null)
-			System.out.println("Error:User does not exist!");
-		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.getTransaction().begin();
 		session.update(user);
-		session.getTransaction().commit();
 		
-		return findUser(user.getEmail());
+		session.getTransaction().commit();
+
 	}
 
-
-	/* (non-Javadoc)
-	 * @see com.sailnow.interfaces.UserService#findUser(java.lang.String)
-	 */
-	public UserModel findUser(String userid) {
+	public User findUser(String userid) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
 		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.getTransaction().begin();
-		UserModel user = (UserModel) session.get(UserModel.class, userid);
-		session.getTransaction().commit();	
+		User user = (User) session.get(User.class, userid);
+		
+		session.getTransaction().commit();
+		
 		return user;
 	}
 
-	
 }

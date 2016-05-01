@@ -9,9 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SaleItem")
-public class SaleItem {
-
+@Table(name = "SaleHistory")
+public class SaleHistory {
+	
 	private String itemid;
 	private User user;
 	private ItemDetails item_details;
@@ -51,5 +51,4 @@ public class SaleItem {
 	public void setItem_details(ItemDetails item_details) {
 		this.item_details = item_details;
 	}
-
 }

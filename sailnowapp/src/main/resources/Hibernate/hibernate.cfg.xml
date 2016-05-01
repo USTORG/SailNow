@@ -33,10 +33,17 @@
 		<mapping resource="Hibernate/mapping/user.hbm.xml"/>
 		<mapping resource="Hibernate/mapping/saleitem.hbm.xml"/> -->
 		<!--<mapping resource="Hibernate/mapping/accesstoken.hbm.xml"/>  -->
-		<mapping class="com.sailnow.models.Items" />
+<!-- 		<mapping class="com.sailnow.models.Items" />
     	<mapping class="com.sailnow.models.User" />
     	<mapping class="com.sailnow.models.SaleItem" />
     	<mapping class="com.sailnow.models.SaleItemId" />
+    	<mapping class="com.sailnow.models.SaleHistory" />
+    	<mapping class="com.sailnow.models.SaleHistoryId" /> -->
+    	<mapping class="com.sailnow.models.User" />
+    	<mapping class="com.sailnow.models.ItemDetails" />
+    	<mapping class="com.sailnow.models.SaleItem" />
+    	    	<mapping class="com.sailnow.models.SaleHistory" />
+    	
     </session-factory>
 
 </hibernate-configuration>

@@ -1,6 +1,6 @@
 package com.sailnow.oauth;
 
-import com.sailnow.models.UserModel;
+
 
 public class AccessTokenResponse {
 

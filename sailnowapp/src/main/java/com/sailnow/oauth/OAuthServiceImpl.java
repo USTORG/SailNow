@@ -7,7 +7,8 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.sailnow.interfaces.OAuthService;
-import com.sailnow.models.UserModel;
+import com.sailnow.models.User;
+
 
 public class OAuthServiceImpl implements OAuthService {
 	
@@ -40,12 +41,12 @@ public class OAuthServiceImpl implements OAuthService {
 		return token;
 	}
 
-	public UserModel getUser(AccessTokenResponse accessToken) {
+	public User getUser(AccessTokenResponse accessToken) {
 		OAuthRequest request = new OAuthRequest();
 		request.setRequest(provider.getApiRequestType());	
 		String url = provider.getUserInfoUrl()+"?"+OAuth.OAUTH_ACCESS_TOKEN+"="+accessToken.getAccess_token();
 		String body = request.executeGetMethod(url);
-		UserModel user = new Gson().fromJson(body, UserModel.class);
+		User user = new Gson().fromJson(body, User.class);
 		return user;
 	}
 

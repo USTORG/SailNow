@@ -1,95 +1,117 @@
 package com.sailnow.models;
 
-import java.util.Date;
+import java.util.Scanner;
 
 import org.hibernate.Session;
+
 import com.sailnow.utils.HibernateUtil;
 
 public class Test {
 
 	public static void main(String[] args) {
-		System.out.println("Hibernate Test...");
 		
-		User user = createUser("user1");
+		Scanner scan = new Scanner (System.in);
 		
-		for(int i = 0; i < 4;i++)
+		boolean exit = false;
+		
+		while(!exit)
 		{
-			createItemForUser(user,i);
+			System.out.println("User Item Service ....");
+			System.out.println("1) Create user");
 		}
 
-		getListItemsForUser(user.getEmail());
-		
-		removeItemsForUser("Package2");
-		
-		getListItemsForUser(user.getEmail());
 	}
 
-	private static void removeItemsForUser(String string) 
-	{
+	private static void printUserHistory(String string) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		
 		session.beginTransaction();
 		
-		Items item = (Items) session.get(Items.class, string);
+		User user  = (User) session.get(User.class, string);
 		
-		session.delete(item);
 		
 		session.getTransaction().commit();
 		
+		System.out.println("User"+user.getEmail());
+		System.out.println("User "+user.getSaleItem().size()+" Items");
+		System.out.println("User "+user.getSaleHistory().size()+" History");
+
 	}
 
-	private static void getListItemsForUser(String email) {
+	private static void createSaleHistory(String userid, ItemDetails itemDetails) {
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		
 		session.beginTransaction();
 		
-		User user = (User) session.get(User.class, email);
+		User user = (User) session.get(User.class, userid);
 		
-		session.getTransaction().commit();
-		System.out.println("User "+user.getEmail()+" has "+user.getSaleItems().size()+" Items:");
-		for(SaleItem items : user.getSaleItems())
-		{
-			System.out.println("Item name: "+items.getItems().getName());
-		}
-
-		
-	}
-
-	private static void createItemForUser(User user, int i) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
-		
-		Items item = new Items();
-		item.setName("Package"+i);
-		item.setDescription("description"+i);
-		item.setDuration(i+" weeks");
-		item.setPrice(i);
-		
-		SaleItem sale = new SaleItem();
-		sale.setItems(item);
+		SaleHistory sale = new SaleHistory();
+		sale.setItemid("Package1");
+		sale.setItem_details(itemDetails);
 		sale.setUser(user);
 		
-		item.getSaleItems().add(sale);
+		session.save(sale);
 		
-		session.save(item);
+		session.getTransaction().commit();
+	}
+
+	private static void removeSaleItem(String string) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		session.beginTransaction();
+		
+		SaleItem  sale = (SaleItem) session.get(SaleItem.class, string);
+		session.delete(sale);		
+		session.getTransaction().commit();
+		
+	}
+
+	private static void printUserSaleItem(String string) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		session.beginTransaction();
+		
+		User user  = (User) session.get(User.class, string);
+		
+		
+		session.getTransaction().commit();
+		
+		System.out.println("User "+user.getEmail());
+		System.out.println("User has "+user.getSaleItem().size()+" Items");
+		
+		
+	}
+
+	private static void createSaleItem(String userid, ItemDetails itemDetails) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		session.beginTransaction();
+		
+		User user = (User) session.get(User.class, userid);
+		
+		SaleItem sale = new SaleItem();
+		sale.setItemid("Package1");
+		sale.setItem_details(itemDetails);
+		sale.setUser(user);
+		
+		session.save(sale);
 		
 		session.getTransaction().commit();
 		
 	}
 
-	private static User createUser(String string) {
+	private static void creatUser(String string) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		
 		session.beginTransaction();
-		User user = new User();
-		user.setEmail("yasinj6@gmail.com");
-		user.setGiven_name("Yasin");
-		user.setFamily_name("Mohamed");
+		
+		User user = new User("user1","Yasin","Jama");
 		
 		session.save(user);
 		
 		session.getTransaction().commit();
 		
-		System.out.println("User "+user.getEmail()+" Created...");
-		return user;
 	}
+
 
 }

@@ -1,17 +1,14 @@
 package com.sailnow.interfaces;
 
-import com.sailnow.models.UserModel;
+import com.sailnow.models.User;
 
 public interface UserService {
-	
-	public UserModel createUser(String userid);
+
+	public void createUser(User user);
 	
 	public void removeUser(String userid);
 	
-	public UserModel updateUser(UserModel user);
+	public void updateUser(User user);
 	
-	public UserModel findUser(String userid);
-
-	public void createUser(UserModel user);
-	
+	public User findUser(String userid);
 }

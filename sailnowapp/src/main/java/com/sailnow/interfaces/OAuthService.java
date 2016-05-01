@@ -1,6 +1,6 @@
 package com.sailnow.interfaces;
 
-import com.sailnow.models.UserModel;
+import com.sailnow.models.User;
 import com.sailnow.oauth.AccessTokenResponse;
 
 public interface OAuthService {
@@ -9,5 +9,5 @@ public interface OAuthService {
 	
 	public AccessTokenResponse getAccessToken(String code, String requestUrl);
 
-	public UserModel getUser(AccessTokenResponse accessToken);
+	public User getUser(AccessTokenResponse accessToken);
 }
