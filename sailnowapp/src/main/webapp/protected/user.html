@@ -51,7 +51,22 @@
 			</div>
 		</div>
 		<div class="col-md-3">
-			<h5>welcome, user</h5>
+		<div id="userName"></div>
+			<script>
+			var text = '{"users":[' +
+			'{"givenName":"John","family_name":"Doe" },' +
+			'{"givenName":"Anna","family_name":"Smith" },' +
+			'{"givenName":"Peter","family_name":"Jones" }]}';
+			
+						
+
+			obj = JSON.parse(text);			
+			document.getElementById("userName").innerHTML =
+				"Welcome" + " " + obj.users[1].givenName + " " + obj.users[1].family_name;
+			
+			</script>
+			
+			
 			<button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
 				Logout
 			</button>
@@ -76,105 +91,83 @@
 			</ul>
 		</div>
 		<div class="col-md-9">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail First" src="http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">BUY</a> <a class="btn" href="#">OFFER</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Second" src="http://www.hawaiimagazine.com/sites/default/files/field/image/St.Regis_.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">BUY</a> <a class="btn" href="#">OFFER</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Third" src="http://www.asiawebdirect.com/media/images/hotels/405/586779.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">BUY</a> <a class="btn" href="#">OFFER</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail First" src="http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">BUY</a> <a class="btn" href="#">OFFER</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Second" src="http://www.hawaiimagazine.com/sites/default/files/field/image/St.Regis_.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">BUY</a> <a class="btn" href="#">OFFER</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<img alt="Bootstrap Thumbnail Third" src="http://www.asiawebdirect.com/media/images/hotels/405/586779.jpg" />
-						<div class="caption">
-							<h3>
-								Thumbnail label
-							</h3>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">BUY</a> <a class="btn" href="#">OFFER</a>
-							</p>
-						</div>
-					</div>
-				</div>
+			<div class="row" >
+				
+					
+					<div id="allpackages"></div>
+		<script>		
+		var packages = [
+		                 {
+		                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"5 days",
+		                 "price":"$250"
+		                 
+		                 }, 
+		                 {
+		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label 2",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"7 days",
+		                 "price":"$450"
+		                 },
+		                 {
+			                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+			                 "name":"Thumbnail label",
+			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+			                 "duration":"5 days",
+			                 "price":"$650"
+			                 }, 
+			                 {
+			                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+			                 "name":"Thumbnail label 2",
+			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+			                 "duration":"7 days",
+			                 "price":"$750"
+			                 },
+			                 {
+				                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+				                 "name":"Thumbnail label",
+				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				                 "duration":"5 days",
+				                 "price":"$450"
+				                 }, 
+				                 {
+				                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+				                 "name":"Thumbnail label 2",
+				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				                 "duration":"7 days",
+				                 "price":"$650"
+				                 },			                 
+		                 {
+		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label 3",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"6 days",
+		                 "price":"$250"
+		                 }
+		             ];
+	
+				
+			    var out = "";
+			    var i;
+			    for(i = 0; i < packages.length; i++) {
+			        out += ' <div class="col-md-4 thumbnail">' + 
+			        '<img src=' + packages[i].url + '/>' +
+			        "<h3>" + packages[i].name + "</h3>" + " " +
+			       "<p>" + packages[i].description + "</p>" +  
+			       "<h4>" + packages[i].price + "</h4>" + 
+			       "<h5>" + packages[i].duration + "</h5>" +
+			       '<br>' +
+			       '<button type="button" class="btn btn-default" onclick="">' + "BUY" + '</button>' + 
+			       '<button type="button" class="btn btn-default" onclick="">' + "OFFER" + '</button>' +
+			    	'</div>';
+			    }
+			    document.getElementById("allpackages").innerHTML = out;			    
+			    
+			</script>			
+					
 			</div>
 		</div>
 	</div>
