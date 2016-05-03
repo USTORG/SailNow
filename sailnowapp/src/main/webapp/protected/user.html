@@ -34,6 +34,53 @@
   <link rel="stylesheet" href="../css/style.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <script type="text/javascript">
+	  $( document ).ready(function() {
+
+		  
+		function getActiveUser()
+		{
+			$.get("/sailnowapp/ItemService?action=activeUser", function(data, status){
+				
+				var user = JSON.parse(data);
+				console.log(user.givenName);
+				console.log(user.family_name);
+				document.getElementById("userName").innerHTML =
+					"Welcome" + " " + user.givenName + " " + user.family_name;
+			});
+			
+		}
+		function getAllPackages()
+		{
+			$.get("/sailnowapp/ItemService?action=listUserPackages", function(data, status){
+				/* alert("Data: " + data + "\nStatus: " + status);
+				return data; */
+				var packages = JSON.parse(data);
+				console.log(packages[0].itemid);
+			    var out = "";
+			    var i;
+			    for(i = 0; i < packages.length; i++) {
+			        out += ' <div class="col-md-4 thumbnail">' + 
+			        '<img src= http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg/>' +
+			        "<h3>" + packages[i].itemid + "</h3>" + " " +
+			       "<p>" + packages[i].description + "</p>" +  
+			       "<h4>" + packages[i].price + "</h4>" + 
+			       "<h5>" + packages[i].duration + "</h5>" +
+			       '<br>' +
+			       '<button type="button" class="btn btn-default" onclick="">' + "BUY" + '</button>' + 
+			       '<button type="button" class="btn btn-default" onclick="">' + "OFFER" + '</button>' +
+			    	'</div>';
+			    }
+			    document.getElementById("allpackages").innerHTML = out;	
+				
+			}); 
+		}
+		
+		getActiveUser();
+		getAllPackages();
+		});
+  
+  </script>
 </head>
 
     
@@ -52,7 +99,7 @@
 		</div>
 		<div class="col-md-3">
 		<div id="userName"></div>
-			<script>
+<!-- 			<script>
 			var text = '{"users":[' +
 			'{"givenName":"John","family_name":"Doe" },' +
 			'{"givenName":"Anna","family_name":"Smith" },' +
@@ -64,7 +111,7 @@
 			document.getElementById("userName").innerHTML =
 				"Welcome" + " " + obj.users[1].givenName + " " + obj.users[1].family_name;
 			
-			</script>
+			</script> -->
 			
 			
 			<button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
@@ -96,7 +143,7 @@
 					
 					<div id="allpackages"></div>
 		<script>		
-		var packages = [
+/* 		var packages = [
 		                 {
 		                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
 		                 "name":"Thumbnail label",
@@ -164,7 +211,7 @@
 			       '<button type="button" class="btn btn-default" onclick="">' + "OFFER" + '</button>' +
 			    	'</div>';
 			    }
-			    document.getElementById("allpackages").innerHTML = out;			    
+			    document.getElementById("allpackages").innerHTML = out;	 */		    
 			    
 			</script>			
 					

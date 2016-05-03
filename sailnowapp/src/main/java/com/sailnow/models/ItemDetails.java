@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,6 +19,8 @@ public class ItemDetails {
 	private String description;
 	private String duraion;
 	private double price;
+	private byte [] image;
+	
 	private Set<SaleItem> saleItem = new HashSet<SaleItem>();
 	
 	
@@ -34,7 +37,14 @@ public class ItemDetails {
 		this.price = price;
 	}
 
-
+	public ItemDetails(String description, String duraion, double price,byte[] image) {
+		super();
+		this.description = description;
+		this.duraion = duraion;
+		this.price = price;
+		this.image = image;
+	}
+	
 	@Id
 	@GeneratedValue
 	@Column(name="ITEMDETAILS_ID")
@@ -96,6 +106,19 @@ public class ItemDetails {
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+
+	public byte[] getImage() {
+		return image;
+	}
+
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 

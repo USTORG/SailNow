@@ -11,7 +11,7 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/SailNow</property>
         <property name="connection.username">postgres</property>
-        <property name="connection.password">seis635</property>
+        <property name="connection.password">L@wson12</property>
 
         <!-- JDBC connection pool (use the built-in) -->
        <!--   <property name="connection.pool_size">2</property>-->
@@ -26,7 +26,7 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>  
 		<property name="format_sql">true</property>
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">create</property> 
 		
   
  	<!-- 	<mapping resource="Hibernate/mapping/package.hbm.xml"/> 

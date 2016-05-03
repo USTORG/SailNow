@@ -1,8 +1,13 @@
 package sailnowapp;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import com.sailnow.core.ItemServiceImpl;
+import com.sailnow.core.ManagerFactory;
 import com.sailnow.core.UserServiceImpl;
 import com.sailnow.interfaces.ItemService;
 import com.sailnow.interfaces.UserService;
@@ -32,7 +37,8 @@ public class ItemServiceTest extends TestCase {
 		suite.addTest(new ItemServiceTest("getUserSaleItemList"));
 		suite.addTest(new ItemServiceTest("purchaseSaleItem"));
 		suite.addTest(new ItemServiceTest("getUserSaleHistory"));
-
+		suite.addTest(new ItemServiceTest("insertImage"));
+		suite.addTest(new ItemServiceTest("getImage"));
 		return suite;
 	}
 	
@@ -99,4 +105,40 @@ public class ItemServiceTest extends TestCase {
 		
 		assertEquals(userHistory.size(),1);
 	}
+	
+	public void insertImage()
+	{
+		File file = new File("/Users/yasinjama/temp/masjid-al-nabazwi01.jpg");
+		byte[] bFile = new byte[(int) file.length()];
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ItemDetails details = new ItemDetails();
+		details.setDescription("des");
+		details.setDuraion("4 days");
+		details.setPrice(800);
+		details.setImage(bFile);
+		service.createSaleItem(ManagerFactory.getUserService().findUser("Yasinj6@gmail.com"), "TestImage", details);
+	}
+	
+	public void getImage()
+	{
+		ItemDetails details = service.getUserSaleItemList("Yasinj6@gmail.com").get(0).getItem_details();
+		try {
+			saveBytesToFile("/Users/yasinjama/temp/imageoutput/masjid-al-nabazwi01.jpg", details.getImage());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+    private static void saveBytesToFile(String filePath, byte[] fileBytes) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(filePath);
+        outputStream.write(fileBytes);
+        outputStream.close();
+    }
 }

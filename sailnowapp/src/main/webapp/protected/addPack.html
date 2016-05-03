@@ -29,10 +29,53 @@
   <link rel="stylesheet" href="../css/style.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <script type="text/javascript">
+  
+		//magic.js
+		  $(document).ready(function() {
+		
+		      // process the form
+		      $('form').submit(function(event) {
+		
+		          // get the form data
+		          // there are many ways to get this data using jQuery (you can use the class or id also)
+/* 		          var formData = {
+		              'action'              : $('input[name=action]').val(),
+		              'itemid'             : $('input[name=itemid]').val(),
+		              'description'    : $('input[name=description]').val(),
+		              'duration'    : $('input[name=duration]').val(),
+		              'file'    : $('input[name=file]').val(),
+		              'price'    : $('input[name=price]').val()
+		          }; */
+				var formData = new FormData($(this)[0]);
+		          // process the form
+		          $.ajax({
+		              type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+		              url         : '/sailnowapp/ItemService', // the url where we want to POST
+		              data        : formData, // our data object
+		              async: false,
+		              cache: false,
+		              contentType: false,
+		              processData: false,
+		          })
+		              // using the done promise callback
+		              .done(function(data) {
+		
+		                  // log data to the console so we can see
+		                  alert(data);
+		
+		                  // here we will handle errors and validation messages
+		              });
+		
+		          // stop the form from submitting the normal way and refreshing the page
+		          event.preventDefault();
+		      });
+		
+		  });
+  
+  </script>
 </head>
-
-    
-    
+      
 <body>
 <div class="wrapperInside">
 
@@ -50,45 +93,51 @@
 				<div class="col-md-4">
 				</div>
 				<div class="col-md-4">
-					<form role="form">
+					<form role="form" id="data">
 						<div class="form-group">
-							 
 							<label for="packName">
 								Package Name
 							</label>
-							<input type="text" class="form-control" id="packName" />
+							<input type="text" name="itemid" class="form-control" id="packName"/>
+							<input type="text" name="action" value="createPackage" hidden="true">
 						</div>
 						<div class="form-group">
 							 
 							<label for="inputDesc">
 								Description
 							</label>
-							<input type="text" class="form-control" id="inputDesc" />
+							<input type="text" name="description" class="form-control" id="inputDesc" />
 						</div>
 						<div class="form-group">
 							 
 							<label for="inputPrice">
 								Price
 							</label>
-							<input type="number" class="form-control" id="inputPrice" />
+							<input type="number"  name="price" class="form-control" id="inputPrice" />
 						</div>
 						<div class="form-group">
 							 
 							<label for="dur">
 								Duration
 							</label>
-							<input type="file" id="dur" />
+							<input type="text" name="duration" id="dur" />
 							<p class="help-block">
 								Example block-level help text here.
 							</p>
 						</div>
-						 
+						<div class="form-group">
+						
+							<label for="fil">
+								Upload Image
+							</label>
+							<input type="file" id="file" name="file" />
+						</div>
 						<button type="submit" class="btn btn-default">
 							SAVE
 						</button>
 					</form>
-				</div>
-				<div class="col-md-4">
+				</div >
+				<div class="col-md-4" id="form-messages" >
 				</div>
 			</div>
 		</div>
