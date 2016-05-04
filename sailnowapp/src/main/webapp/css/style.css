@@ -12,9 +12,13 @@ body, html {
 .thumbnail h5, .thumbnail h4 {
     text-align: center;
 }
+.pack {
+    width:100% !important;
+}
 .btn {
-    margin-right: 12px;
-    margin-left: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+	padding: 0 1rem;
 }
 .wrapperInside {
     
@@ -22,70 +26,99 @@ body, html {
     background-size: cover;
 }
 .wrapper {
+    height:100vh;
+    margin:0;	
+}
+.wrapper, .wrapperInside {
 	background:url(https://images.unsplash.com/photo-1444627127335-900f8d0a77ab?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=bdbb1f4d6e5a7e91bb0c0d15d0172329);
 	background-attachment: fixed;
     background-size: cover;
+
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #1094B4;
 }
 
+/*-------------ADD PACK PAGE-------------*/
+p.help-block, input#file {
+    color: #fff;
+}
+label {
+    font-size: 1rem;
+    color: #fff;
+}
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+	border-bottom:.5px dotted #fff;
+	height:2rem;
+	color: #fff;
+	font-size:1rem;
+	letter-spacing:.6px;
+}
+input#dur {
+    color: #fff;
+    margin-top: 15px;
+}
 /*---USER PAGE----*/
 #userName {
     color: #fff;
     padding: 10px 0;
+    text-transform: capitalize;
 }
 
 .application-info-div {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 800px;
-  height: 103px;
-  
-  margin: 0 0 0 0;
+
 }
 
 .main-connection-div {
-  margin: 5px 0 0 0;
-  padding: 20px;
-  background: #FFFFFF;
-  width: 80%;
+  margin: 15px 0 0 0;
+  padding: 15px 0 0 0;
+ background: rgba(255, 255, 255, 0.08);
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
 .icon-service {
   /*border-right: 125px solid #F5F5F5;*/
-  width: 120px;
+
   margin: 0;
   padding: 0;
+}
+.icon-service img {
+transform: rotate(180deg);
+-webkit-transform: rotate(180deg);
+-ms-transform: rotate(180deg);
+-moz-transform: rotate(180deg);
+    margin-top: -12px;	
 }
 
 .text-application-info-div {
   position: relative;
-  top: -110px;
-  left: 135px;
+
 }
 
 .title-text-application-info-div {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  font-size: 23px;
-font-weight: 500;
-    width: 82%;
-    color: #3498DB;
-text-shadow:1px 1px 1px #ffffff;
+  font-size: 43px;
+font-weight: 300;
+    width: 100%;
+    color: #fff;
+    letter-spacing:.5px;
 }
 p.description-text-application-info-div {
 	font-size: 17px;
     color: #ffffff;
-    font-weight: 500;	
-    text-shadow:1px 1px 1px #000;
+    font-weight: 300;	
+    
 }
 .description-text-application-info-div {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  font-size; 18px;
+  font-size: 18px;
   width: 82%;
 }
 
@@ -96,8 +129,8 @@ p.description-text-application-info-div {
   font-weight: 300;
   font-size: 17px;
     color: #ffffff;
-    font-weight: 500;  
-    text-shadow:1px 1px 1px #000;
+    font-weight: 300;  
+    letter-spacing:.5px;
 }
 
 .green-text {
@@ -106,7 +139,7 @@ p.description-text-application-info-div {
 }
 
 .cookies-used {
-  width: 800px;
+
   background: rgba(0, 0, 0, 0.7);
   margin-left: auto !important;
   margin-right: auto !important;
@@ -140,10 +173,12 @@ p.description-text-application-info-div {
 
 .title-log-in-main-connection-div {
   font-family: 'Roboto', sans-serif;
-  font-size: 24px;
+  font-size: 34px;
   font-weight: 300;
   margin: 5px 0 0 15px;
   padding: 0;
+  color:#ffffff;
+  
 }
 
 .title-register-main-connection-div {
@@ -302,7 +337,7 @@ h1 {
 h3 {
     font-size: 22px;
     font-weight: bold;
-    color: #646464;
+    color: #fff;
 }
 .page-header {
     border-bottom: 1px solid rgba(238, 238, 238, 0.25);
