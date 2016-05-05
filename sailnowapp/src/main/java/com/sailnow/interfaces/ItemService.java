@@ -22,4 +22,6 @@ public interface ItemService {
 	public List<SaleItem> getUserSaleItemList(String email);
 	
 	public List<SaleHistory> getUserSaleHistory(String email);
+	
+	public List<SaleItem> getAllItems();
 }

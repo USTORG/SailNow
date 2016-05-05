@@ -50,9 +50,10 @@
 			});
 			
 		}
+		
 		function getAllPackages()
 		{
-			$.get("/sailnowapp/ItemService?action=listUserPackages", function(data, status){
+			$.get("/sailnowapp/ItemService?action=getAllItems", function(data, status){
 				/* alert("Data: " + data + "\nStatus: " + status);
 				return data; */
 				var packages = JSON.parse(data);
@@ -61,13 +62,13 @@
 			    var i;
 			    for(i = 0; i < packages.length; i++) {
 			        out += ' <div class="col-md-4 thumbnail">' + 
-			        '<img src= http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg/>' +
+			        '<img src="'+packages[i].image+'"/>' +
 			        "<h3>" + packages[i].itemid + "</h3>" + " " +
 			       "<p>" + packages[i].description + "</p>" +  
 			       "<h4>" + packages[i].price + "</h4>" + 
 			       "<h5>" + packages[i].duration + "</h5>" +
 			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="">' + "BUY" + '</button>' + 
+			       '<button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
 			       '<button type="button" class="btn btn-default" onclick="">' + "GET MORE INFO" + '</button>' +
 			    	'</div>';
 			    }
@@ -80,6 +81,14 @@
 		getAllPackages();
 		});
   
+		function purchaseItem(itemid)
+		{
+			$.get("/sailnowapp/ItemService?action=purchaseItem&itemid="+itemid+"", function(data,status){
+				
+				console.log(data);
+			});
+		}
+		
   </script>
 </head>
 

@@ -41,6 +41,7 @@ public class ItemServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    private String image;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -82,6 +83,9 @@ public class ItemServlet extends HttpServlet {
 		}else if(action.equals("activeUser"))
 		{
 			output = proccessActiveUser(request);
+		}else if(action.equals("getAllItems"))
+		{
+			output = getAllItems(request);
 		}
 		else
 		{
@@ -92,6 +96,15 @@ public class ItemServlet extends HttpServlet {
 		
 		response.getWriter().println(output);
 		
+	}
+
+	private String getAllItems(HttpServletRequest request) {
+		
+		ItemService service = ManagerFactory.getItemService();
+		
+		String output = converListToJson(service.getAllItems());
+		
+		return output;
 	}
 
 	private String proccessActiveUser(HttpServletRequest request) {
@@ -118,10 +131,14 @@ public class ItemServlet extends HttpServlet {
 	private String processpurchaseItem(HttpServletRequest request, HttpServletResponse response) {
 		
 		ItemService item = ManagerFactory.getItemService();
-		String userid = request.getParameter("userid");
 		String itemid = request.getParameter("itemid");
+		User user = (User) request.getSession().getAttribute("User");
+		user = ManagerFactory.getUserService().findUser(user.getEmail());
 		
-		User user = ManagerFactory.getUserService().findUser(userid);
+		if(item.findSaleItem(itemid).getUser().getEmail().equals(user.getEmail()))
+		{
+			return "User can't purchase own Item";
+		}
 		item.purchaseSaleItem(user, itemid);
 		String output = "Success";
 		return output;
@@ -179,23 +196,18 @@ public class ItemServlet extends HttpServlet {
 			json.addProperty("description", item.getItem_details().getDescription());
 			json.addProperty("duration", item.getItem_details().getDuraion());
 			json.addProperty("price", item.getItem_details().getPrice());
+			json.addProperty("image", new String(item.getItem_details().getImage()));
 			array.add(json);
 		}
 
 		return new Gson().toJson(array);
 	}
 
-    private static void saveBytesToFile(String filePath, byte[] fileBytes) throws IOException {
-        FileOutputStream outputStream = new FileOutputStream(filePath);
-        outputStream.write(fileBytes);
-        outputStream.close();
-    }
 	
 	private String converListToJson(List<SaleItem> list) {
 		
 		JsonObject json = null;
 		JsonArray array = new JsonArray();
-		int num = 0;
 		for(SaleItem item : list)
 		{
 			json = new JsonObject();
@@ -203,15 +215,8 @@ public class ItemServlet extends HttpServlet {
 			json.addProperty("description", item.getItem_details().getDescription());
 			json.addProperty("duration", item.getItem_details().getDuraion());
 			json.addProperty("price", item.getItem_details().getPrice());
+			json.addProperty("image", new String(item.getItem_details().getImage()));
 			array.add(json);
-			
-			try {
-				saveBytesToFile("/Users/yasinjama/temp/imageoutput/image"+num+".jpg",item.getItem_details().getImage());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			num++;
 
 		}
 		return new Gson().toJson(array);
@@ -224,7 +229,7 @@ public class ItemServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		String duration = request.getParameter("duration");
 		double price = Double.parseDouble(request.getParameter("price"));
-		byte [] image = getImage(request);
+		String image  = request.getParameter("file");
 		ItemService item = ManagerFactory.getItemService();
 		
 		//For Testing purpose pass userid by parameter
@@ -244,70 +249,11 @@ public class ItemServlet extends HttpServlet {
 			
 		}
 		
-		item.createSaleItem(user, itemid, new ItemDetails(description,duration,price,image));
+		item.createSaleItem(user, itemid, new ItemDetails(description,duration,price,image.getBytes()));
 		
 		String output = "Success";
 		return output;
 	}
-
-	private byte [] getImage(HttpServletRequest request) {
-		
-		byte [] bytes = new byte[1024];
-		InputStream filecontent = null;
-		OutputStream out = null;
-	     try {
-			Part filePart = request.getPart("file");
-			 filecontent = filePart.getInputStream();
-			 final String fileName = getFileName(filePart);
-			 
-			 filecontent.read(bytes);
-//			 File fil =  new File("/Users/yasinjama/temp/"+fileName);
-//			out = new FileOutputStream(fil);
-//			
-//			int read = 0;
-//			
-//			while ((read = filecontent.read(bytes)) != -1) {
-//	            out.write(bytes, 0, read);
-//	        }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	     finally {
-	         if (out != null) {
-	             try {
-					out.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	         }
-	         if (filecontent != null) {
-	             try {
-					filecontent.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	         }
-	     }
-	    return bytes;
-	}
-	
-	private String getFileName(final Part part) {
-	    final String partHeader = part.getHeader("content-disposition");
-	    for (String content : part.getHeader("content-disposition").split(";")) {
-	        if (content.trim().startsWith("filename")) {
-	            return content.substring(
-	                    content.indexOf('=') + 1).trim().replace("\"", "");
-	        }
-	    }
-	    return null;
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

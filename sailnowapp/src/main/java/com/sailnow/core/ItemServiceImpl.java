@@ -59,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
 		SaleHistory history = new SaleHistory();
 		history.setItemid(sale.getItemid());
 		history.setItem_details(new ItemDetails(sale.getItem_details().getDescription(),
-				sale.getItem_details().getDuraion(),sale.getItem_details().getPrice()));
+				sale.getItem_details().getDuraion(),sale.getItem_details().getPrice(),sale.getItem_details().getImage()));
 		history.setUser(user);
 		
 		session.delete(sale);
@@ -97,6 +97,17 @@ public class ItemServiceImpl implements ItemService {
 		history.addAll(user.getSaleHistory());
 		
 		return history;
+	}
+
+	public List<SaleItem> getAllItems() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		
+		List<SaleItem> list = session.createCriteria(SaleItem.class).list();
+		
+		session.getTransaction().commit();
+		
+		return list;
 	}
 
 }

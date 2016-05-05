@@ -61,25 +61,55 @@
 			    var i;
 			    for(i = 0; i < packages.length; i++) {
 			        out += ' <div class="col-md-12 thumbnail pack">' + 
-			        '<img src= http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg/>' +
+			        '<img src="'+packages[i].image+'"/>' +
 			        "<h3>" + packages[i].itemid + "</h3>" + " " +
 			       "<p>" + packages[i].description + "</p>" +  
 			       "<h4>" + packages[i].price + "</h4>" + 
 			       "<h5>" + packages[i].duration + "</h5>" +
 			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="">' + "BUY" + '</button>' + 
+			       '<button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
 			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
 			    	'</div>';
 			    }
-			    document.getElementById("sellpackages").innerHTML = out;
-			    document.getElementById("buypackages").innerHTML = out;
-				
+			    document.getElementById("sellpackages").innerHTML = out;			
+			}); 
+		}
+		
+		function getPurchaseHistory()
+		{
+			$.get("/sailnowapp/ItemService?action=listUserPackageHistory", function(data, status){
+				var packages = JSON.parse(data);
+				console.log(packages[0].itemid);
+			    var out = "";
+			    var i;
+			    for(i = 0; i < packages.length; i++) {
+			        out += ' <div class="col-md-12 thumbnail pack">' + 
+			        '<img src="'+packages[i].image+'"/>' +
+			        "<h3>" + packages[i].itemid + "</h3>" + " " +
+			       "<p>" + packages[i].description + "</p>" +  
+			       "<h4>" + packages[i].price + "</h4>" + 
+			       "<h5>" + packages[i].duration + "</h5>" +
+			       '<br>' +
+			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
+			    	'</div>';
+			    }
+ 			    document.getElementById("buypackages").innerHTML = out;
+ 				
 			}); 
 		}
 		
 		getActiveUser();
 		getAllPackages();
+		getPurchaseHistory();
 		});
+	  
+		function purchaseItem(itemid)
+		{
+			$.get("/sailnowapp/ItemService?action=purchaseItem&itemid="+itemid+"", function(data,status){
+				
+				console.log(data);
+			});
+		}
   
   </script>
 </head>
