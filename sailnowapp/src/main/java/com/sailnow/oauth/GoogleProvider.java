@@ -1,6 +1,4 @@
-package com.sailnow.servlets;
-
-import com.sailnow.oauth.Provider;
+package com.sailnow.oauth;
 
 public class GoogleProvider extends Provider {
 

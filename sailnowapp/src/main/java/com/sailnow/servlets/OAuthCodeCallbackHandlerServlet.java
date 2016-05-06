@@ -1,35 +1,20 @@
 package com.sailnow.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
-import com.google.gson.Gson;
 import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.OAuthService;
-import com.sailnow.interfaces.OAuthTokenDao;
 import com.sailnow.interfaces.UserService;
 import com.sailnow.models.User;
 import com.sailnow.oauth.AccessTokenResponse;
+import com.sailnow.oauth.GoogleProvider;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthServiceBuilder;
 import com.sailnow.utils.CachUtil;
-import com.sailnow.oauth.OAuthRequest;
 
 /**
  * Servlet implementation class OAuthCodeCallbackHandlerServlet
