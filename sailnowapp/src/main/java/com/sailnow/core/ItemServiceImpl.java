@@ -61,6 +61,8 @@ public class ItemServiceImpl implements ItemService {
 		history.setItem_details(new ItemDetails(sale.getItem_details().getDescription(),
 				sale.getItem_details().getDuraion(),sale.getItem_details().getPrice(),sale.getItem_details().getImage()));
 		history.setUser(user);
+		history.setSeller_fname(sale.getUser().getGiven_name());
+		history.setSeller_lname(sale.getUser().getFamily_name());
 		
 		session.delete(sale);
 		session.save(history);
