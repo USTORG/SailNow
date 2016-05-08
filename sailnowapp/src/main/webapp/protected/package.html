@@ -7,7 +7,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<style type="text/css">
 		div#wrapper{
-			width: 1200px;
+			width: 1000px;
 		}
 		div#userPanel{
 		    width:200px;
@@ -15,95 +15,22 @@
 					
 		}
 		div#createPackagePanel{
-		    width:250px;
+		    width:300px;
 		    float: left;
 		}
-		div#getUserPackages{
-		    width:200px;
-		    float: left;
-					
-		}
-		div#getUserHistory{
-		    width:200px;
-		    float: left;
-					
-		}
-		div#Purchase{
-		    width:200px;
+		div#findPackagePanel{
+		    width:300px;
 		    float: left;
 					
 		}
 	</style>
-	<script type="text/javascript">
-	
-	var dataURL;
-	
-	  var openFile = function(event) {
-		    var input = event.target;
-
-		    var reader = new FileReader();
-		    reader.onload = function(){
-		     dataURL = reader.result;
-		       console.log(dataURL);
-/* 			      var output = document.getElementById('output'); */
-/* 			      output.src = dataURL; */
-		    };
-		    reader.readAsDataURL(input.files[0]);
-		  };
-	
-	//magic.js
-	  $(document).ready(function() {
-	
-	      // process the form
-	      $("#createPackageForm").submit(function(event) {
-	
-	          // get the form data
-	          // there are many ways to get this data using jQuery (you can use the class or id also)
-	          var formData = {
-	              'action'              : $('input[name=caction]').val(),
-	              'itemid'             : $('input[name=itemid]').val(),
-	              'description'    : $('input[name=description]').val(),
-	              'duration'    : $('input[name=duration]').val(),
-	              'file'    : dataURL,
-	              'userid'	: $('input[name=puserid]').val(),
-	              'price'    : $('input[name=price]').val()
-	          }; 
-/* 				var formData = new FormData($(this)[0]); */
-	          // process the form
-	          $.ajax({
-	              type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-	              url         : '/sailnowapp/ItemService', // the url where we want to POST
-	              data        : formData, // our data object
-/* 	              async: false,
-	              cache: false,
-	              contentType: false,
-	              processData: false, */
-	          })
-	              // using the done promise callback
-	              .done(function(data) {
-	
-	                  // log data to the console so we can see
-/* 	                  sweetAlert("Great!", "Your new package is created!", "success"); */
- 						alert(data);
-	
-	                  // here we will handle errors and validation messages
-	              });
-	
-	          // stop the form from submitting the normal way and refreshing the page
-	          event.preventDefault();
-	      });
-	
-	  });
-		
-	
-	</script>
 </head>
 
 <body>
- 	<div id="wrapper"> 
+ 	<div id="wrapperInside"> 
 		<div id="userPanel">
 			<h2>Create User</h2>
-	        <form action="/sailnowapp/ItemService" method="get" target="display">
+	        <form action="/sailnowapp/SampleServlet" method="get" target="display">
 	            Userid:
 	            <input type="text" name="action" value="createUser" hidden="true">
 	            <input type="text" name="userid">
@@ -112,46 +39,25 @@
 	     </div>	
 	     <div id="createPackagePanel">
 	     	<h2>Create Package</h2>
-	        <form id="createPackageForm">
-	            <input type="text" name="caction" value="createPackage" hidden="true">
-	            Itemid:<input type="text" name="itemid"><br>
+	        <form action="/sailnowapp/SampleServlet" method="get" target="display">
+	            <input type="text" name="action" value="createPackage" hidden="true">
+	            Name:<input type="text" name="name"><br>
 	            Description:<input type="text" name="description"><br>
 	           	Duration:<input type="text" name="duration"><br>
 	            Price:<input type="text" name="price"><br>
-	            image:<input type="file" id="file" name="file" onchange='openFile(event)' /><br>
-	            User:<input type="text" name="puserid"><br>
+	            User:<input type="text" name="userid"><br>
 	            <input type="submit" value="create">
 	        </form>
 	      </div> 
-		<div id="getUserPackages">
-			<h2>Packages</h2>
-	        <form action="/sailnowapp/ItemService" method="get" target="display">
-	          	  User Id:
-	             <input type="text" name="userid">
-	            <input type="text" name="action" value="listUserPackages" hidden="true">
+		<div id="findPackagePanel">
+			<h2>Find Package</h2>
+	        <form action="/sailnowapp/SampleServlet" method="get" target="display">
+	            Package Name:
+	            <input type="text" name="action" value="findPackage" hidden="true">
+	            <input type="text" name="name">
 	            <input type="submit" value="search">
 	        </form>
 	     </div>	  
-	     <div id="getUserHistory">
-			<h2>History</h2>
-	        <form action="/sailnowapp/ItemService" method="get" target="display">
-	            User Id:
-	             <input type="text" name="userid">
-	            <input type="text" name="action" value="listUserPackageHistory" hidden="true">
-	            <input type="submit" value="search">
-	        </form>
-	     </div>	
-	   <div id="Purchase">
-			<h2>Purchase</h2>
-	        <form action="/sailnowapp/ItemService" method="get" target="display">
-	            <input type="text" name="action" value="purchaseItem" hidden="true">
-	           Itemid:
-	            <input type="text" name="itemid"><br>
-	            Userid:
-	         	<input type="text" name="userid"><br>
-	            <input type="submit" value="search">
-	        </form>
-	     </div>	
 	       <iframe name="display" src="" style=" margin-top: 50px;width: 500px; border-style:solid;"></iframe>
 	</div>	
 	</body>

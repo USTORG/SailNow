@@ -34,85 +34,6 @@
   <link rel="stylesheet" href="../css/style.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-  <script type="text/javascript">
-	  $( document ).ready(function() {
-
-		  
-		function getActiveUser()
-		{
-			$.get("/sailnowapp/ItemService?action=activeUser", function(data, status){
-				
-				var user = JSON.parse(data);
-				console.log(user.givenName);
-				console.log(user.family_name);
-				document.getElementById("userName").innerHTML =
-					"Welcome" + " " + user.givenName + " " + user.family_name;
-			});
-			
-		}
-		function getAllPackages()
-		{
-			$.get("/sailnowapp/ItemService?action=listUserPackages", function(data, status){
-				/* alert("Data: " + data + "\nStatus: " + status);
-				return data; */
-				var packages = JSON.parse(data);
-				console.log(packages[0].itemid);
-			    var out = "";
-			    var i;
-			    for(i = 0; i < packages.length; i++) {
-			        out += ' <div class="col-md-12 thumbnail pack">' + 
-			        '<img src="'+packages[i].image+'"/>' +
-			        "<h3>" + packages[i].itemid + "</h3>" + " " +
-			       "<p>" + packages[i].description + "</p>" +  
-			       "<h4>" + packages[i].price + "</h4>" + 
-			       "<h5>" + packages[i].duration + "</h5>" +
-			       "<h5>" + packages[i].fname +" "+packages[i].lname+ "</h5>" +
-			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
-			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
-			    	'</div>';
-			    }
-			    document.getElementById("sellpackages").innerHTML = out;			
-			}); 
-		}
-		
-		function getPurchaseHistory()
-		{
-			$.get("/sailnowapp/ItemService?action=listUserPackageHistory", function(data, status){
-				var packages = JSON.parse(data);
-				console.log(packages[0].itemid);
-			    var out = "";
-			    var i;
-			    for(i = 0; i < packages.length; i++) {
-			        out += ' <div class="col-md-12 thumbnail pack">' + 
-			        '<img src="'+packages[i].image+'"/>' +
-			        "<h3>" + packages[i].itemid + "</h3>" + " " +
-			       "<p>" + packages[i].description + "</p>" +  
-			       "<h4>" + packages[i].price + "</h4>" + 
-			       "<h5>" + packages[i].duration + "</h5>" +
-			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
-			    	'</div>';
-			    }
- 			    document.getElementById("buypackages").innerHTML = out;
- 				
-			}); 
-		}
-		
-		getActiveUser();
-		getAllPackages();
-		getPurchaseHistory();
-		});
-	  
-		function purchaseItem(itemid)
-		{
-			$.get("/sailnowapp/ItemService?action=purchaseItem&itemid="+itemid+"", function(data,status){
-				
-				console.log(data);
-			});
-		}
-  
-  </script>
 </head>
 
     
@@ -125,12 +46,25 @@
 		<div class="col-md-9">
 			<div class="page-header">
 				<h1>
-					My Packages
+					Dashboard
 				</h1>
 			</div>
 		</div>
 		<div class="col-md-3">
 		<div id="userName"></div>
+			<script>
+			var text = '{"users":[' +
+			'{"givenName":"John","family_name":"Doe" },' +
+			'{"givenName":"Anna","family_name":"Smith" },' +
+			'{"givenName":"Peter","family_name":"Jones" }]}';
+			
+						
+
+			obj = JSON.parse(text);			
+			document.getElementById("userName").innerHTML =
+				"Welcome" + " " + obj.users[1].givenName + " " + obj.users[1].family_name;
+			
+			</script>
 			
 			
 			<button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
@@ -140,7 +74,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 menu-left">
-				<ul class="nav nav-stacked nav-pills">
+			<ul class="nav nav-stacked nav-pills">
 				<li>
 					<a href="/sailnowapp/protected/user.html">Home</a>
 				</li>
@@ -151,15 +85,100 @@
 					<a  href="/sailnowapp/protected/mypackages.html">My Packages</a>
 				</li>
 				
-				</ul>
+			</ul>
 		</div>
 		<div class="col-md-4">
 			
 				
 					<h4 style="text-align:center; color:#fff; font-size: 1.28rem;
     margin: 0;">SELLING</h4>
-					<div id="sellpackages"><h2>SELLING</h2></div>	
+					<div id="sellpackages"><h2>SELLING</h2></div>
+		<script>	
+		/*
+		[{"itemid":"Thumbnail Label","description":"Description","duration":"5 days","price":600.0}]		
+		 $(document).ready(function(){
+				//ON Page Load   
+				
+				$(document).ready(function(){
+				       $.getJson("sailnowapp/ItemService?action=getUserList", function(data, status){
+				           alert("Data: " + data + "\nStatus: " + status);
+				       });
+				   });
+				});
+		*/
+		var sellpackage =	[
+		                 {
+		                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"5 days",
+		                 "price":"$250"
+		                 
+		                 }, 
+		                 {
+		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label 2",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"7 days",
+		                 "price":"$450"
+		                 },
+		                 {
+			                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+			                 "name":"Thumbnail label",
+			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+			                 "duration":"5 days",
+			                 "price":"$650"
+			                 }, 
+			                 {
+			                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+			                 "name":"Thumbnail label 2",
+			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+			                 "duration":"7 days",
+			                 "price":"$750"
+			                 },
+			                 {
+				                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+				                 "name":"Thumbnail label",
+				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				                 "duration":"5 days",
+				                 "price":"$450"
+				                 }, 
+				                 {
+				                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+				                 "name":"Thumbnail label 2",
+				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				                 "duration":"7 days",
+				                 "price":"$650"
+				                 },			                 
+		                 {
+		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label 3",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"6 days",
+		                 "price":"$250"
+		                 }
+		             ];
+
+				
+			    var out = "";
+			    var i;
+			    for(i = 0; i < sellpackage.length; i++) {
+			        out += ' <div class="col-md-12 thumbnail pack">' + 
+			        '<img src=' + sellpackage[i].url + '/>' +
+			        "<h3>" + sellpackage[i].name + "</h3>" + " " +
+			       "<p>" + sellpackage[i].description + "</p>" +  
+			       "<h4>" + sellpackage[i].price + "</h4>" + 
+			       "<h5>" + sellpackage[i].duration + "</h5>" +
+			       '<br>' +
+			        
+			       '<button type="button" class="btn btn-default" onclick="">' + "View" + '</button>' +
+			    	'</div>';
+			    }
+			    document.getElementById("sellpackages").innerHTML = out;			    
+			    
+			</script>			
 					
+			
 		</div>
 <div class="col-md-4">
 			
@@ -167,7 +186,92 @@
 					<h4 style="text-align:center; color:#fff;font-size: 1.28rem;
     margin: 0;">PURCHASE HISTORY</h4>
 					<div id="buypackages"></div>
+		<script>	
+	/*	[{"itemid":"Thumbnail Label","description":"Description","duration":"5 days","price":600.0}]		
+		$(document).ready(function(){
+			//ON Page Load   
+			
+			$(document).ready(function(){
+			       $.getJson("sailnowapp/ItemService?action=getUserList", function(data, status){
+			           alert("Data: " + data + "\nStatus: " + status);
+			       });
+			   });
+			});
+	*/
+		
+		
+		var buypackage = 	
+			[
+		                 {
+		                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"5 days",
+		                 "price":"$250"
+		                 
+		                 }, 
+		                 {
+		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label 2",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"7 days",
+		                 "price":"$450"
+		                 },
+		                 {
+			                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+			                 "name":"Thumbnail label",
+			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+			                 "duration":"5 days",
+			                 "price":"$650"
+			                 }, 
+			                 {
+			                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+			                 "name":"Thumbnail label 2",
+			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+			                 "duration":"7 days",
+			                 "price":"$750"
+			                 },
+			                 {
+				                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+				                 "name":"Thumbnail label",
+				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				                 "duration":"5 days",
+				                 "price":"$450"
+				                 }, 
+				                 {
+				                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+				                 "name":"Thumbnail label 2",
+				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+				                 "duration":"7 days",
+				                 "price":"$650"
+				                 },			                 
+		                 {
+		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
+		                 "name":"Thumbnail label 3",
+		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+		                 "duration":"6 days",
+		                 "price":"$250"
+		                 }
+		             ];
+
 				
+			    var out = "";
+			    var i;
+			    for(i = 0; i < buypackage.length; i++) {
+			        out += ' <div class="col-md-12 thumbnail pack">' + 
+			        '<img src=' + buypackage[i].url + '/>' +
+			        "<h3>" + buypackage[i].name + "</h3>" + " " +
+			       "<p>" + buypackage[i].description + "</p>" +  
+			       "<h4>" + buypackage[i].price + "</h4>" + 
+			       "<h5>" + buypackage[i].duration + "</h5>" +
+			       '<br>' +
+			        
+			       '<button type="button" class="btn btn-default" onclick="">' + "View" + '</button>' +
+			    	'</div>';
+			    }
+			    document.getElementById("buypackages").innerHTML = out;			    
+			    
+			</script>			
 					
 			
 		</div>		
