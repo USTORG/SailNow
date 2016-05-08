@@ -13,6 +13,20 @@ import javax.persistence.Table;
 public class SaleHistory {
 	
 	private String itemid;
+	private String seller_fname;
+	public String getSeller_fname() {
+		return seller_fname;
+	}
+	public void setSeller_fname(String seller_fname) {
+		this.seller_fname = seller_fname;
+	}
+	public String getSeller_lname() {
+		return seller_lname;
+	}
+	public void setSeller_lname(String seller_lname) {
+		this.seller_lname = seller_lname;
+	}
+	private String seller_lname;
 	private User user;
 	private ItemDetails item_details;
 	
