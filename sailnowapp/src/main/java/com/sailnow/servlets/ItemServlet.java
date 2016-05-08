@@ -1,6 +1,11 @@
 package com.sailnow.servlets;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -35,6 +41,7 @@ public class ItemServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    private String image;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -130,11 +137,14 @@ public class ItemServlet extends HttpServlet {
 		
 		if(item.findSaleItem(itemid).getUser().getEmail().equals(user.getEmail()))
 		{
-			return "User can't purchase own Item";
+//			Anup - Added item id and changed text			
+			return "You can't purchase own Item";
 		}
 		item.purchaseSaleItem(user, itemid);
-		String output = "Success";
+//		Anup - Added item id and changed text
+		String output = "Thank you for purchasing: " + itemid;
 		return output;
+		
 	}
 
 	private String processlistUserPackageHistory(HttpServletRequest request, HttpServletResponse response) {
@@ -190,9 +200,8 @@ public class ItemServlet extends HttpServlet {
 			json.addProperty("duration", item.getItem_details().getDuraion());
 			json.addProperty("price", item.getItem_details().getPrice());
 			json.addProperty("image", new String(item.getItem_details().getImage()));
-			json.addProperty("fname", item.getUser().getGiven_name());
-			json.addProperty("lname", item.getUser().getFamily_name());
-
+			json.addProperty("fname", item.getSeller_fname());
+			json.addProperty("lname", item.getSeller_lname());
 			array.add(json);
 		}
 
