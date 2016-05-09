@@ -25,6 +25,10 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+ <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="../dist/sweetalert.min.js"></script>
+<script src="../dist/sweetalert-dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../dist/sweetalert.css">
     
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -48,13 +52,14 @@
 				console.log(user.givenName);
 				console.log(user.family_name);
 				document.getElementById("userName").innerHTML =
-					"Welcome" + " " + user.givenName + " " + user.family_name;
+					"Welcome, " + " " + user.givenName + " " + user.family_name;
 			});
 			
 		}
+		
 		function getAllPackages()
 		{
-			$.get("/sailnowapp/ItemService?action=listUserPackages", function(data, status){
+			$.get("/sailnowapp/ItemService?action=getAllItems", function(data, status){
 				/* alert("Data: " + data + "\nStatus: " + status);
 				return data; */
 				var packages = JSON.parse(data);
@@ -62,59 +67,37 @@
 			    var out = "";
 			    var i;
 			    for(i = 0; i < packages.length; i++) {
-			        out += ' <div class="col-md-12 thumbnail pack">' + 
+			        out += ' <div class="col-md-12 bigimg">' + 
 			        '<img src="'+packages[i].image+'"/>' +
+			        '</div>' + 
+			        '<div class="col-md-12 text-center thumbnail bigbox">' +
 			        "<h4>" + packages[i].itemid + "</h4>" + " " +
-			       /* "<p>" + packages[i].description + "</p>" +   */
+			       "<p>" + packages[i].description + "</p>" +  
 			       "<h4>" + "$" + packages[i].price + "</h4>" + 
 			       "<h5>" + packages[i].duration + "</h5>" +
 			       "<h6>" + "Sold By: " + packages[i].fname +" "+packages[i].lname+ "</h6>" +
 			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
-			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
-			    	'</div>';
+			       '<div class="pbtn"><button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
+			       /* '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' + */
+			    	'</div></div>';
 			    }
-			    document.getElementById("sellpackages").innerHTML = out;			
-			}); 
-		}
-		
-		function getPurchaseHistory()
-		{
-			$.get("/sailnowapp/ItemService?action=listUserPackageHistory", function(data, status){
-				var packages = JSON.parse(data);
-				console.log(packages[0].itemid);
-			    var out = "";
-			    var i;
-			    for(i = 0; i < packages.length; i++) {
-			        out += ' <div class="col-md-12 thumbnail pack">' + 
-			        '<img src="'+packages[i].image+'"/>' +
-			        "<h4>" + packages[i].itemid + "</h4>" + " " +
-			       /* "<p>" + packages[i].description + "</p>" +   */
-			       "<h4>" + "$" + packages[i].price + "</h4>" + 
-			       "<h5>" + packages[i].duration + "</h5>" +
-			       "<h6>" + "Sold By: " + packages[i].fname +" "+packages[i].lname+ "</h6>" +
-			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
-			    	'</div>';
-			    }
- 			    document.getElementById("buypackages").innerHTML = out;
- 				
+			    document.getElementById("showpack").innerHTML = out;	
+				
 			}); 
 		}
 		
 		getActiveUser();
 		getAllPackages();
-		getPurchaseHistory();
 		});
-	  
+  
 		function purchaseItem(itemid)
 		{
 			$.get("/sailnowapp/ItemService?action=purchaseItem&itemid="+itemid+"", function(data,status){
 				
-				console.log(data);
+				 sweetAlert(data);
 			});
 		}
-  
+		
   </script>
 </head>
 
@@ -124,7 +107,7 @@
 <div class="wrapperInside">
 
 <div class="container-fluid">
-	<div class="row header">
+<div class="row header">
 		<div class="col-md-3 col-sm-3">
 			<div class="page-header">
 				<h1>
@@ -163,25 +146,11 @@
 		<div class="col-md-2 col-sm-2 col-xs-6">
 			<div id="userName"></div>						
 		</div>
-		<div class="col-md-2 col-sm-2 logout"><button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
+		<div class="col-md-2 col-sm-2"><button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
 				Logout</button></div>
 	</div>
 	<div class="row">
-	<div class="container pagetitle">
-			<p>MY PACKAGES</p>
-		</div>
-	</div>
-	<div class="row">
-	<div class="container title">
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
-		
-		</div>
-		<div class="col-md-4">
-		
-		</div>
-	</div>
-	<div class="container">
+		<div class="container">
 		<div class="col-md-4 menu-left">
 				<ul class="nav nav-stacked nav-pills">
 				<li>
@@ -191,26 +160,19 @@
 					<a href="/sailnowapp/protected/addPack.html">Sell Packages</a>
 				</li>
 				<li class="active">
-					<a  href="/sailnowapp/protected/mypackages.html">My Packages</a>
+					<a href="/sailnowapp/protected/mypackages.html">My Packages</a>
 				</li>
 				
 				</ul>
 		</div>
-		<div class="col-md-4">
-		<h4 class="subtitle" style="text-align:center; color:#fff; font-size: 1.28rem;
-    margin: 0;">SELLING</h4>
-					<div id="sellpackages"><h3 style="text-align:center; padding:8px; border:1px solid #fff;">NO ITEMS FOR SALE</h3></div>	
+		<div class="col-md-8 packfull">
+			<div class="row" >				
 					
+					<div id="showpack"></div>		
+					
+			</div>
 		</div>
-<div class="col-md-4">
-			<h4 class="subtitle" style="text-align:center; color:#fff;font-size: 1.28rem;
-    margin: 0;">PURCHASE HISTORY</h4>
-			<div id="buypackages"></div>
-				
-					
-			
-		</div>	
-</div>			
+		</div>
 	</div>
 </div>
   

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sailnow.core.ManagerFactory;
 import com.sailnow.interfaces.OAuthService;
-import com.sailnow.oauth.GoogleProvider;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthServiceBuilder;
 import com.sailnow.utils.CachUtil;

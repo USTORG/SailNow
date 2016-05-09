@@ -3,6 +3,7 @@ package com.sailnow.core;
 import java.io.IOException;
 
 import com.sailnow.interfaces.ItemService;
+import com.sailnow.interfaces.OAuthTokenDao;
 import com.sailnow.interfaces.UserService;
 import com.sailnow.oauth.OAuthProperties;
 import com.sailnow.oauth.OAuthRequest;
@@ -25,5 +26,9 @@ public class ManagerFactory {
 		OAuthProperties prop = new OAuthProperties();
 		
 		return new OAuthRequest();
+	}
+
+	public static OAuthTokenDao getOAuthTokenDao() {
+		return new OAuthTokenDaoImpl();
 	}
 }

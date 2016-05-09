@@ -11,8 +11,9 @@
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 	<meta http-equiv="pragma" content="no-cache" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Sail Now</title>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
     <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,6 +24,10 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+ <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="../dist/sweetalert.min.js"></script>
+<script src="../dist/sweetalert-dev.js"></script>
+<link rel="stylesheet" type="text/css" href="../dist/sweetalert.css">
     
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -34,156 +39,143 @@
   <link rel="stylesheet" href="../css/style.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <script type="text/javascript">
+	  $( document ).ready(function() {
+
+		  
+		function getActiveUser()
+		{
+			$.get("/sailnowapp/ItemService?action=activeUser", function(data, status){
+				
+				var user = JSON.parse(data);
+				console.log(user.givenName);
+				console.log(user.family_name);
+				document.getElementById("userName").innerHTML =
+					"Welcome, " + " " + user.givenName + " " + user.family_name;
+			});
+			
+		}
+		
+		function getAllPackages()
+		{
+			$.get("/sailnowapp/ItemService?action=getAllItems", function(data, status){
+				/* alert("Data: " + data + "\nStatus: " + status);
+				return data; */
+				var packages = JSON.parse(data);
+				console.log(packages[0].itemid);
+			    var out = "";
+			    var i;
+			    for(i = 0; i < packages.length; i++) {
+			        out += ' <div class="col-md-4"><div class="col-md-12 thumbnail">' + 
+			        '<img src="'+packages[i].image+'"/>' +
+			        "<h4>" + packages[i].itemid + "</h4>" + " " +
+			        "<h5>" + packages[i].duration + "</h5>" +
+			       /* "<p>" + packages[i].description + "</p>" +  */ 
+			       "<h4>" + "$" + packages[i].price + "</h4>" + 			       
+			       "<h6>" + "Sold By: " + packages[i].fname +" "+packages[i].lname+ "</h6>" +
+			       '<br>' +
+			       '<div class="pbtn"><button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
+			       '<button type="button" class="btn btn-default" onclick="">' + '<a href="viewpack.html">' + "VIEW MORE INFO" + '</a>' + '</button>' +
+			    	'</div></div></div>';
+			    }
+			    document.getElementById("allpackages").innerHTML = out;	
+				
+			}); 
+		}
+		
+		getActiveUser();
+		getAllPackages();
+		});
+  
+		function purchaseItem(itemid)
+		{
+			$.get("/sailnowapp/ItemService?action=purchaseItem&itemid="+itemid+"", function(data,status){
+				
+				 sweetAlert(data);	
+				 window.setTimeout(function(){ 
+					    location.reload();
+					} ,3000);
+				 
+			});
+			
+		}
+				
+  </script>
 </head>
 
     
     
 <body>
-<div class="wrapper">
+<div class="wrapperInside">
 
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-9">
+	<div class="row header">
+		<div class="col-md-3 col-sm-3">
 			<div class="page-header">
 				<h1>
-					Dashboard
+					<a href="../index.html">Sail Now</a>
+					<i class="fa fa-braille" aria-hidden="true"></i>
 				</h1>
 			</div>
 		</div>
-		<div class="col-md-3">
-		<div id="userName"></div>
-			<script>
-			var text = '{"users":[' +
-			'{"givenName":"John","family_name":"Doe" },' +
-			'{"givenName":"Anna","family_name":"Smith" },' +
-			'{"givenName":"Peter","family_name":"Jones" }]}';
-			
-						
-
-			obj = JSON.parse(text);			
-			document.getElementById("userName").innerHTML =
-				"Welcome" + " " + obj.users[1].givenName + " " + obj.users[1].family_name;
-			
-			</script>
-			
-			
-			<button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
-				Logout
-			</button>
+		<div class="col-md-5 col-sm-5 col-xs-2">
+		
+<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-header">
+					 
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="nav-item active">
+							<a href="/sailnowapp/protected/user.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="/sailnowapp/protected/addPack.html">Sell Packages</a>
+						</li>
+						<li class="nav-item">
+							<a  href="/sailnowapp/protected/mypackages.html">My Packages</a>
+						</li>
+				
+				</ul>
+								
+				</div>
+				
+			</nav>				
 		</div>
+		<div class="col-md-2 col-sm-2 col-xs-6">
+			<div id="userName"></div>						
+		</div>
+		<div class="col-md-2 col-sm-2 logout"><button type="button" class="btn btn-default" onclick="window.location.href='/sailnowapp/Logout'">
+				Logout</button></div>
 	</div>
 	<div class="row">
-		<div class="col-md-3 menu-left">
-			<ul class="nav nav-stacked nav-pills">
-				<li>
-					<a href="/sailnowapp/protected/user.html">Home</a>
-				</li>
-				<li>
-					<a href="/sailnowapp/protected/addPack.html">Create Packages</a>
-				</li>
-				<li class="active">
-					<a  href="/sailnowapp/protected/mypackages.html">My Packages</a>
-				</li>
-				
-			</ul>
-		</div>
-		<div class="col-md-9">
-			<div class="row" >
-				
+		<div class="container">
+		<div class="col-md-12">
+			<div class="row" >				
 					
-					<div id="allpackages"></div>
-		<script>	
-		[{"itemid":"Thumbnail Label","description":"Description","duration":"5 days","price":600.0}]		
-		
-		var packages = $(document).ready(function(){
-			//ON Page Load   
-			
-			$(document).ready(function(){
-			       $.getJson("sailnowapp/ItemService?action=getUserList", function(data, status){
-			           alert("Data: " + data + "\nStatus: " + status);
-			       });
-			   });
-			});
-	/*		
-			[
-		                 {
-		                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-		                 "name":"Thumbnail label",
-		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-		                 "duration":"5 days",
-		                 "price":"$250"
-		                 
-		                 }, 
-		                 {
-		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-		                 "name":"Thumbnail label 2",
-		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-		                 "duration":"7 days",
-		                 "price":"$450"
-		                 },
-		                 {
-			                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-			                 "name":"Thumbnail label",
-			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-			                 "duration":"5 days",
-			                 "price":"$650"
-			                 }, 
-			                 {
-			                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-			                 "name":"Thumbnail label 2",
-			                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-			                 "duration":"7 days",
-			                 "price":"$750"
-			                 },
-			                 {
-				                 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-				                 "name":"Thumbnail label",
-				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-				                 "duration":"5 days",
-				                 "price":"$450"
-				                 }, 
-				                 {
-				                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-				                 "name":"Thumbnail label 2",
-				                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-				                 "duration":"7 days",
-				                 "price":"$650"
-				                 },			                 
-		                 {
-		                	 "url":"http://cruiseweb.com/admin/Images/image-gallery/boogie-boarding-hawaii.jpg",
-		                 "name":"Thumbnail label 3",
-		                 "description":"Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
-		                 "duration":"6 days",
-		                 "price":"$250"
-		                 }
-		             ];
-*/
-				
-			    var out = "";
-			    var i;
-			    for(i = 0; i < packages.length; i++) {
-			        out += ' <div class="col-md-4 thumbnail">' + 
-			        '<img src=' + packages[i].url + '/>' +
-			        "<h3>" + packages[i].name + "</h3>" + " " +
-			       "<p>" + packages[i].description + "</p>" +  
-			       "<h4>" + packages[i].price + "</h4>" + 
-			       "<h5>" + packages[i].duration + "</h5>" +
-			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="">' + "BUY" + '</button>' + 
-			       '<button type="button" class="btn btn-default" onclick="">' + "Send More Info" + '</button>' +
-			    	'</div>';
-			    }
-			    document.getElementById("allpackages").innerHTML = out;			    
-			    
-			</script>			
+					<div id="allpackages"></div>		
 					
 			</div>
+		</div>
 		</div>
 	</div>
 </div>
   
 </div>
-
+	<script>
+	$(document).ready(function(){
+		$("#allpackages").animate({ //be sure to change the class of your element to "header"
+	        left:'0',
+	        opacity:'1',
+	        height:'auto',
+	        duration:'3000',
+	        width:'100%'
+	    });
+	});
+	</script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

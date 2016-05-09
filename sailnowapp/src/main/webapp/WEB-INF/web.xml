@@ -9,11 +9,21 @@
   	<display-name>AuthenticationFilter</display-name>
   	<description></description>
   	<filter-class>com.sailnow.filters.AuthenticationFilter</filter-class>
+  	<init-param>
+  		<param-name>avoid-urls</param-name>
+  		<param-value>index.jsp</param-value>
+  	</init-param>
   </filter>
   <filter-mapping>
   	<filter-name>AuthenticationFilter</filter-name>
   	<url-pattern>/protected/*</url-pattern>
   </filter-mapping>
+  <servlet>
+  	<servlet-name>PackageService</servlet-name>
+  	<display-name>PackageService</display-name>
+  	<description></description>
+  	<servlet-class>com.sailnow.servlets.PackageServlet</servlet-class>
+  </servlet>
   <servlet>
   	<servlet-name>SignIn</servlet-name>
   	<display-name>SignIn</display-name>
@@ -33,11 +43,27 @@
   	<servlet-class>com.sailnow.servlets.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
+  	<servlet-name>UserService</servlet-name>
+  	<display-name>UserService</display-name>
+  	<description></description>
+  	<servlet-class>com.sailnow.servlets.UserServiceServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>SampleServlet</servlet-name>
+  	<display-name>SampleServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.sailnow.servlets.SampleServlet</servlet-class>
+  </servlet>
+  <servlet>
   	<servlet-name>ItemService</servlet-name>
   	<display-name>ItemService</display-name>
   	<description></description>
   	<servlet-class>com.sailnow.servlets.ItemServlet</servlet-class>
   </servlet>
+  <servlet-mapping>
+  	<servlet-name>PackageService</servlet-name>
+  	<url-pattern>/PackageService</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>SignIn</servlet-name>
   	<url-pattern>/SignIn</url-pattern>
@@ -49,6 +75,14 @@
   <servlet-mapping>
   	<servlet-name>Logout</servlet-name>
   	<url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UserService</servlet-name>
+  	<url-pattern>/UserService</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SampleServlet</servlet-name>
+  	<url-pattern>/SampleServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>ItemService</servlet-name>
