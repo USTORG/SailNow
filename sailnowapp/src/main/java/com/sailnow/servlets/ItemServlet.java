@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -86,16 +87,41 @@ public class ItemServlet extends HttpServlet {
 		}else if(action.equals("getAllItems"))
 		{
 			output = getAllItems(request);
+		}else if(action.equals("getItemById"))
+		{
+			output = getItemById(request);
 		}
 		else
 		{
 			output = "Unrecognized action";
 		}
-		
-		
-		
+				
 		response.getWriter().println(output);
 		
+	}
+
+	private String getItemById(HttpServletRequest request) {
+		
+		String itemId = request.getParameter("itemid");
+		
+		if(itemId ==null || itemId.equals(""))
+		{
+			return "Missing ItemId Parameter";
+		}
+		
+		ItemService item = ManagerFactory.getItemService();
+		
+		SaleItem saleItem = item.findSaleItem(itemId);
+		
+		if(saleItem== null)
+		{
+			return "Item Doesn't Exist";
+		}
+		
+		List<SaleItem> list = new ArrayList<SaleItem>();
+		list.add(saleItem);
+		
+		return converListToJson(list);
 	}
 
 	private String getAllItems(HttpServletRequest request) {

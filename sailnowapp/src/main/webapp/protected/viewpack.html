@@ -59,7 +59,9 @@
 		
 		function getAllPackages()
 		{
-			$.get("/sailnowapp/ItemService?action=getAllItems", function(data, status){
+			var itmemId = window.location.search.split('itemid=')[1];
+			console.log(itmemId);
+			$.get("/sailnowapp/ItemService?action=getItemById&itemid="+itmemId+"", function(data, status){
 				/* alert("Data: " + data + "\nStatus: " + status);
 				return data; */
 				var packages = JSON.parse(data);
