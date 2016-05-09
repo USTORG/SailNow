@@ -31,8 +31,11 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	public void removeSaleItem(String itemid) {
-		// TODO Auto-generated method stub
-
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		SaleItem item = (SaleItem) session.get(SaleItem.class, itemid);
+		session.delete(item);
+		session.getTransaction().commit();
 	}
 
 	public SaleItem updateSaleItem(SaleItem item) {

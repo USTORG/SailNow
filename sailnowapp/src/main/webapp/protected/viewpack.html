@@ -43,12 +43,13 @@
   <script type="text/javascript">
 	  $( document ).ready(function() {
 
-		  
+		var user;
+		
 		function getActiveUser()
 		{
 			$.get("/sailnowapp/ItemService?action=activeUser", function(data, status){
 				
-				var user = JSON.parse(data);
+				user = JSON.parse(data);
 				console.log(user.givenName);
 				console.log(user.family_name);
 				document.getElementById("userName").innerHTML =
@@ -78,10 +79,15 @@
 			       "<h4>" + "$" + packages[i].price + "</h4>" + 
 			       "<h5>" + packages[i].duration + "</h5>" +
 			       "<h6>" + "Sold By: " + packages[i].fname +" "+packages[i].lname+ "</h6>" +
-			       '<br>' +
-			       '<div class="pbtn"><button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
+			       '<br>';
+			       if(user.givenName != packages[i].fname && user.family_name != packages[i].lname)
+			    	   {
+			    	   
+			    	   	out+='<div class="pbtn"><button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>'+
+				    	'</div></div>';
+			    	   }
+			       
 			       /* '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' + */
-			    	'</div></div>';
 			    }
 			    document.getElementById("showpack").innerHTML = out;	
 				

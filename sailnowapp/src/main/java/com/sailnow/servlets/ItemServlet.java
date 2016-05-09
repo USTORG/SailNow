@@ -90,6 +90,9 @@ public class ItemServlet extends HttpServlet {
 		}else if(action.equals("getItemById"))
 		{
 			output = getItemById(request);
+		}else if (action.equals("deleteItem"))
+		{
+			output=deleteItem(request);
 		}
 		else
 		{
@@ -98,6 +101,21 @@ public class ItemServlet extends HttpServlet {
 				
 		response.getWriter().println(output);
 		
+	}
+
+	private String deleteItem(HttpServletRequest request) {
+		
+		String itemid = request.getParameter("itemid");
+		
+		ItemService item = ManagerFactory.getItemService();
+		
+		if(item.findSaleItem(itemid)==null)
+		{
+			return "Item Doesn't exist";
+		}
+		
+		item.removeSaleItem(itemid);
+		return "Item deleted";
 	}
 
 	private String getItemById(HttpServletRequest request) {

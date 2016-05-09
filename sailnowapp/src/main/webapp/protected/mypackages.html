@@ -58,7 +58,6 @@
 				/* alert("Data: " + data + "\nStatus: " + status);
 				return data; */
 				var packages = JSON.parse(data);
-				console.log(packages[0].itemid);
 			    var out = "";
 			    var i;
 			    for(i = 0; i < packages.length; i++) {
@@ -70,8 +69,8 @@
 			       "<h5>" + packages[i].duration + "</h5>" +
 			       "<h6>" + "Sold By: " + packages[i].fname +" "+packages[i].lname+ "</h6>" +
 			       '<br>' +
-			       '<button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
-			       '<button type="button" class="btn btn-default" onclick="">' + "VIEW MORE INFO" + '</button>' +
+			       '<button type="button" class="btn btn-default" onclick="deleteItem(\''+packages[i].itemid+'\')">' + "DELETE" + '</button>' + 
+			       '<button type="button" class="btn btn-default" onclick="">' + '<a href="viewpack.html?itemid='+packages[i].itemid+'">' + "VIEW MORE INFO" + '</a>' + '</button>' +
 			    	'</div>';
 			    }
 			    document.getElementById("sellpackages").innerHTML = out;			
@@ -82,7 +81,6 @@
 		{
 			$.get("/sailnowapp/ItemService?action=listUserPackageHistory", function(data, status){
 				var packages = JSON.parse(data);
-				console.log(packages[0].itemid);
 			    var out = "";
 			    var i;
 			    for(i = 0; i < packages.length; i++) {
@@ -107,9 +105,9 @@
 		getPurchaseHistory();
 		});
 	  
-		function purchaseItem(itemid)
+		function deleteItem(itemid)
 		{
-			$.get("/sailnowapp/ItemService?action=purchaseItem&itemid="+itemid+"", function(data,status){
+			$.get("/sailnowapp/ItemService?action=deleteItem&itemid="+itemid+"", function(data,status){
 				
 				console.log(data);
 			});

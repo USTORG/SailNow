@@ -42,12 +42,13 @@
   <script type="text/javascript">
 	  $( document ).ready(function() {
 
+		  var user;
 		  
 		function getActiveUser()
 		{
 			$.get("/sailnowapp/ItemService?action=activeUser", function(data, status){
 				
-				var user = JSON.parse(data);
+				user = JSON.parse(data);
 				console.log(user.givenName);
 				console.log(user.family_name);
 				document.getElementById("userName").innerHTML =
@@ -73,9 +74,12 @@
 			       /* "<p>" + packages[i].description + "</p>" +  */ 
 			       "<h4>" + "$" + packages[i].price + "</h4>" + 			       
 			       "<h6>" + "Sold By: " + packages[i].fname +" "+packages[i].lname+ "</h6>" +
-			       '<br>' +
-			       '<div class="pbtn"><button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' + 
-			       '<button type="button" class="btn btn-default" onclick="">' + '<a href="viewpack.html?itemid='+packages[i].itemid+'">' + "VIEW MORE INFO" + '</a>' + '</button>' +
+			       '<br>';
+			       if(user.givenName != packages[i].fname && user.family_name != packages[i].lname)
+			    	   {
+				      	out+= '<div class="pbtn"><button type="button" class="btn btn-default" onclick="purchaseItem(\''+packages[i].itemid+'\')">' + "BUY" + '</button>' 
+			    	   }
+			       out+='<button type="button" class="btn btn-default" onclick="">' + '<a href="viewpack.html?itemid='+packages[i].itemid+'">' + "VIEW MORE INFO" + '</a>' + '</button>' +
 			    	'</div></div></div>';
 			    }
 			    document.getElementById("allpackages").innerHTML = out;	
